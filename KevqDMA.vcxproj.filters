@@ -202,9 +202,6 @@
     <ClCompile Include="src\app\Bootstrap\runtime_console.cpp">
       <Filter>Source Files\app\Bootstrap</Filter>
     </ClCompile>
-    <ClCompile Include="src\app\Bootstrap\version_update.cpp">
-      <Filter>Source Files\app\Bootstrap</Filter>
-    </ClCompile>
     <ClCompile Include="src\app\Config\config.cpp">
       <Filter>Source Files\app\Config</Filter>
     </ClCompile>
@@ -299,9 +296,6 @@
       <Filter>Source Files\vendor\qrcodegen</Filter>
     </ClCompile>
     <ClInclude Include="include\app\Bootstrap\runtime_console.h">
-      <Filter>Header Files\app\Bootstrap</Filter>
-    </ClInclude>
-    <ClInclude Include="include\app\Bootstrap\version_update.h">
       <Filter>Header Files\app\Bootstrap</Filter>
     </ClInclude>
     <ClInclude Include="include\app\Config\config.h">

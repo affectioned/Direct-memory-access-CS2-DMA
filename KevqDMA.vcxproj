@@ -182,7 +182,6 @@
   <ItemGroup>
     <ClCompile Include="src\app\Bootstrap\main.cpp" />
     <ClCompile Include="src\app\Bootstrap\runtime_console.cpp" />
-    <ClCompile Include="src\app\Bootstrap\version_update.cpp" />
     <ClCompile Include="src\app\Config\config.cpp" />
     <ClCompile Include="src\app\Config\project_paths.cpp" />
     <ClCompile Include="src\app\Platform\overlay.cpp" />
@@ -217,7 +216,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\app\Bootstrap\runtime_console.h" />
-    <ClInclude Include="include\app\Bootstrap\version_update.h" />
     <ClInclude Include="include\app\Config\config.h" />
     <ClInclude Include="include\app\Config\project_paths.h" />
     <ClInclude Include="include\app\Core\app_state.h" />

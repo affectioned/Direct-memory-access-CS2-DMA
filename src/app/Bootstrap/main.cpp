@@ -4,7 +4,6 @@
 #include <DMALibrary/Memory/Memory.h>
 
 #include "app/Bootstrap/runtime_console.h"
-#include "app/Bootstrap/version_update.h"
 #include "app/Config/config.h"
 #include "app/Core/build_info.h"
 #include "app/Core/globals.h"
@@ -13,8 +12,6 @@
 #include "Features/WebRadar/webradar.h"
 #include "Game/Offsets/runtime_offsets.h"
 
-#include <algorithm>
-#include <cctype>
 #include <atomic>
 #include <conio.h>
 #include <cstring>
@@ -147,44 +144,6 @@ namespace
         console.PrintLine("GitHub", app::build_info::RepositoryUrl() + " [ " + app::build_info::VersionTag() + " ]");
     }
 
-    bool PromptToInstallVersionUpdate(const bootstrap::VersionUpdateInfo& updateInfo)
-    {
-        HANDLE inputHandle = GetStdHandle(STD_INPUT_HANDLE);
-        if (inputHandle == INVALID_HANDLE_VALUE)
-            return false;
-        if (GetFileType(inputHandle) != FILE_TYPE_CHAR)
-            return false;
-
-        std::cout
-            << "  | GitHub | New version available: "
-            << updateInfo.latestVersion
-            << " (current "
-            << updateInfo.currentVersion
-            << ")"
-            << '\n';
-        std::cout
-            << "  | GitHub | Install new version now? [Y/n]: "
-            << std::flush;
-
-        std::string answer;
-        if (!std::getline(std::cin, answer))
-            return false;
-
-        answer.erase(
-            std::remove_if(
-                answer.begin(),
-                answer.end(),
-                [](unsigned char ch) { return std::isspace(ch) != 0; }),
-            answer.end());
-        std::transform(
-            answer.begin(),
-            answer.end(),
-            answer.begin(),
-            [](unsigned char ch) { return static_cast<char>(std::tolower(ch)); });
-
-        return answer.empty() || answer == "y" || answer == "yes";
-    }
-
     std::string BuildCompactOffsetTimestampDisplay(const std::string& canonicalTimestamp)
     {
         if (canonicalTimestamp.size() < 12)
@@ -280,36 +239,6 @@ int main(int argc, char* argv[])
     console.PrintInfoOk("Connection");
 
     std::cout << '\n';
-
-    if (!offsetsSelfTest) {
-        std::string versionUpdateMessage;
-        bootstrap::VersionUpdateInfo versionUpdateInfo = {};
-        const bool versionCheckOk = RunWithPendingAnimation(console, "GitHub", "Version check", [&]() {
-            return bootstrap::CheckForVersionUpdate(&versionUpdateInfo, &versionUpdateMessage);
-        });
-        if (versionCheckOk) {
-            console.PrintOk("GitHub", "Version check");
-            if (versionUpdateInfo.updateAvailable) {
-                console.PrintLine("GitHub", "Update available | " + versionUpdateInfo.latestVersion + " | Current: " + versionUpdateInfo.currentVersion);
-                if (PromptToInstallVersionUpdate(versionUpdateInfo)) {
-                    std::string openReleaseError;
-                    if (bootstrap::OpenVersionUpdateReleasePage(versionUpdateInfo, &openReleaseError)) {
-                        console.PrintOk("GitHub", "Open latest release");
-                        return 0;
-                    }
-                    console.PrintFail("GitHub", "Open latest release");
-                    if (!openReleaseError.empty())
-                        console.PrintLine("GitHub", openReleaseError);
-                }
-            }
-        } else {
-            console.PrintFail("GitHub", "Version check");
-            if (!versionUpdateMessage.empty())
-                console.PrintLine("GitHub", versionUpdateMessage);
-        }
-
-        std::cout << '\n';
-    }
 
     std::string autoUpdateMessage;
     runtime_offsets::AutoUpdateReport autoUpdateReport = {};

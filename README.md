@@ -115,7 +115,7 @@ Sequence: main PC → DMA data → second PC software → display overlay via Di
 <code>Advanced settings and diagnostics for tuning, debugging, and state verification.</code>
 
 <code>Main Start UI</code>
-<code>Launch log for connection, version checks, offsets, initialization, and readiness.</code>
+<code>Launch log for connection, offsets, initialization, and readiness.</code>
 
 <code>ESP UI</code>
 <code>ESP visual settings for toggles, previews, layouts, and colors.</code>
