@@ -29,6 +29,18 @@ namespace {
         uint64_t expiresUs = 0;
     };
 
+    enum class SoundEventType : uint8_t {
+        Footstep = 0,
+        Shot,
+        Reload,
+    };
+
+    struct SoundEvent {
+        SoundEventType type = SoundEventType::Footstep;
+        Vector3 position = {};
+        uint64_t createdUs = 0;
+    };
+
     struct BombState {
         bool planted = false;
         bool ticking = false;
@@ -211,6 +223,41 @@ static constexpr uint64_t kLiveVisibilityFreshnessUs = 50000;
 
 static WorldMarker s_worldMarkers[256] = {};
 static int s_worldMarkerCount = 0;
+
+static constexpr int kSoundEventRingSize = 96;
+static std::mutex s_soundEventMutex;
+static SoundEvent s_soundEvents[kSoundEventRingSize] = {};
+static uint32_t s_soundEventWriteIndex = 0;
+
+static int s_prevShotsFired[64] = {};
+static uint8_t s_prevInReload[64] = {};
+static uint64_t s_lastFootstepEmitUs[64] = {};
+static bool s_soundPrevStateValid[64] = {};
+
+static void PushSoundEvent(SoundEventType type, const Vector3& position, uint64_t nowUs)
+{
+    std::lock_guard<std::mutex> lock(s_soundEventMutex);
+    SoundEvent& slot = s_soundEvents[s_soundEventWriteIndex % kSoundEventRingSize];
+    slot.type = type;
+    slot.position = position;
+    slot.createdUs = nowUs;
+    ++s_soundEventWriteIndex;
+}
+
+static int CopySoundEvents(SoundEvent* out, int maxOut, uint64_t minCreatedUs)
+{
+    if (!out || maxOut <= 0)
+        return 0;
+    std::lock_guard<std::mutex> lock(s_soundEventMutex);
+    int written = 0;
+    for (int i = 0; i < kSoundEventRingSize && written < maxOut; ++i) {
+        const SoundEvent& evt = s_soundEvents[i];
+        if (evt.createdUs == 0 || evt.createdUs < minCreatedUs)
+            continue;
+        out[written++] = evt;
+    }
+    return written;
+}
 static BombState s_bombState = {};
 static SpectatorEntry s_spectators[64] = {};
 static int s_spectatorCount = 0;

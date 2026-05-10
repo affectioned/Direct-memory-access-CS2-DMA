@@ -40,6 +40,7 @@ namespace
         Item,
         World,
         Bomb,
+        Sound,
         Dot
     };
 
@@ -294,6 +295,11 @@ namespace
             drawList->AddLine(Add(pos, 12.0f, 6.2f), Add(pos, 16.0f, 3.4f), color, 1.35f);
             drawList->AddLine(Add(pos, 16.0f, 3.4f), Add(pos, 18.0f, 4.4f), color, 1.15f);
             drawList->AddCircleFilled(Add(pos, 9.6f, 11.6f), 1.25f, color);
+            break;
+        case EspIcon::Sound:
+            drawList->AddCircleFilled(c, 1.6f, color);
+            drawList->AddCircle(c, 4.4f, color, 24, 1.4f);
+            drawList->AddCircle(c, 7.6f, color, 28, 1.4f);
             break;
         case EspIcon::Dot:
             drawList->AddCircleFilled(c, 4.0f, color);
@@ -770,9 +776,6 @@ void ui::tabs::esp_sections::RenderOptionsGrid()
             }, true, width); },
         [] (float width) { DrawOptionRow("snap", EspIcon::Snap, "Snap Lines", "", &g::espSnaplines, g::espSnaplineColor, [] {
                 ToggleSetting("top", "Snap From Top", &g::espSnaplineFromTop);
-                ImGui::Separator();
-                ToggleColorRow("arrows", "Screen Arrows", &g::espOffscreenArrows, g::espOffscreenColor);
-                ToggleSetting("sound", "Sound ESP", &g::espSound);
             }, true, width); });
 
     renderPair(
@@ -818,8 +821,18 @@ void ui::tabs::esp_sections::RenderOptionsGrid()
                 SizeRow("bmbtxtsz", "Text Size", &g::espBombTextSize, 0.0f, 24.0f);
             }, true, width); });
 
-    if (!g::espOffscreenArrows)
-        g::espSound = false;
+    renderPair(
+        [] (float width) { DrawOptionRow("arrows", EspIcon::Arrows, "Off-screen Arrows", "", &g::espOffscreenArrows, g::espOffscreenColor, [] {
+                SizeRow("arrowsz", "Arrow Size", &g::espOffscreenSize, 8.0f, 32.0f);
+            }, true, width); },
+        [] (float width) { DrawOptionRow("sound", EspIcon::Sound, "Sound ESP", "", &g::espSound, nullptr, [] {
+                FloatRow("snd_range", "Range", &g::espSoundRange, 200.0f, 4000.0f, "%.0f");
+                FloatRow("snd_dur", "Duration", &g::espSoundDuration, 0.4f, 4.0f, "%.2f");
+                ImGui::Separator();
+                ToggleSetting("snd_foot", "Footsteps", &g::espSoundFootsteps);
+                ToggleSetting("snd_shot", "Shots Fired", &g::espSoundShots);
+                ToggleSetting("snd_rel", "Reloads", &g::espSoundReloads);
+            }, true, width); });
 }
 
 void ui::tabs::esp_sections::RenderWeaponSection()

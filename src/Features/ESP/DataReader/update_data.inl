@@ -226,6 +226,7 @@ bool esp::UpdateData()
     const uint64_t _stagePlayerAuxEnd = TickNowUs();
 #include "inventory_reads.inl"
     const uint64_t _stageInvEnd = TickNowUs();
+#include "sound_reads.inl"
 #include "bone_reads.inl"
     const uint64_t _stageBoneEnd = TickNowUs();
     const uint64_t nowUs = TickNowUs();

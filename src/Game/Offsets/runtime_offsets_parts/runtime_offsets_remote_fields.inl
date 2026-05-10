@@ -60,6 +60,8 @@
         RemoteField{"cs2_dumper::schemas::client_dll::C_BaseEntity::m_nSubclassID", "client_dll.hpp", &runtime_offsets::Values::C_BaseEntity_m_nSubclassID},
         RemoteField{"cs2_dumper::schemas::client_dll::C_BaseEntity::m_vecVelocity", "client_dll.hpp", &runtime_offsets::Values::C_BaseEntity_m_vecVelocity},
         RemoteField{"cs2_dumper::schemas::client_dll::C_BasePlayerWeapon::m_iClip1", "client_dll.hpp", &runtime_offsets::Values::C_BasePlayerWeapon_m_iClip1},
+        RemoteField{"cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_iShotsFired", "client_dll.hpp", &runtime_offsets::Values::C_CSPlayerPawn_m_iShotsFired},
+        RemoteField{"cs2_dumper::schemas::client_dll::C_CSWeaponBase::m_bInReload", "client_dll.hpp", &runtime_offsets::Values::C_CSWeaponBase_m_bInReload},
         RemoteField{"cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_bIsScoped", "client_dll.hpp", &runtime_offsets::Values::C_CSPlayerPawn_m_bIsScoped},
         RemoteField{"cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_bIsDefusing", "client_dll.hpp", &runtime_offsets::Values::C_CSPlayerPawn_m_bIsDefusing},
         RemoteField{"cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_angEyeAngles", "client_dll.hpp", &runtime_offsets::Values::C_CSPlayerPawn_m_angEyeAngles},

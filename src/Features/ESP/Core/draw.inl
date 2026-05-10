@@ -2,7 +2,7 @@
 
 void esp::Draw()
 {
-    if (!g::espEnabled && !g::radarEnabled && !g::radarSpectatorList && !g::espBombTime) return;
+    if (!g::espEnabled && !g::radarEnabled && !g::radarSpectatorList && !g::espBombTime && !g::espSound) return;
 
     const float screenW = static_cast<float>(g::screenWidth);
     const float screenH = static_cast<float>(g::screenHeight);
@@ -92,7 +92,7 @@ void esp::Draw()
     const bool usableViewMatrix = isLikelyViewMatrix(viewMatrix);
 
     
-    const uint64_t nowMs = nowUs / 1000u;
+    [[maybe_unused]] const uint64_t nowMs = nowUs / 1000u;
     const uint64_t nominalIntervalUs = 1000000u / DATA_WORKER_HZ;
     const uint64_t snapshotIntervalUs =
         (captureTimeUs > prevCaptureTimeUs && prevCaptureTimeUs > 0)
@@ -501,7 +501,6 @@ void esp::Draw()
 #include "../Render/player_flags.inl"
 #include "../Render/player_skeleton.inl"
 #include "../Render/player_snaplines.inl"
-#include "../Render/player_sound.inl"
         }
     }
 
@@ -509,6 +508,8 @@ void esp::Draw()
 #include "../Render/world_esp.inl"
 
 #include "../Render/bomb_esp.inl"
+
+#include "../Render/sound_events.inl"
     }
 
 #include "Features/Radar/Render/radar_overlay.inl"

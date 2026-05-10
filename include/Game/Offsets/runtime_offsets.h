@@ -92,6 +92,8 @@ namespace runtime_offsets
         std::ptrdiff_t C_BaseEntity_m_nSubclassID = 0;
         std::ptrdiff_t C_BaseEntity_m_vecVelocity = 0;
         std::ptrdiff_t C_BasePlayerWeapon_m_iClip1 = 0;
+        std::ptrdiff_t C_CSPlayerPawn_m_iShotsFired = 0;
+        std::ptrdiff_t C_CSWeaponBase_m_bInReload = 0;
         std::ptrdiff_t C_CSPlayerPawn_m_bIsScoped = 0;
         std::ptrdiff_t C_CSPlayerPawn_m_bIsDefusing = 0;
         std::ptrdiff_t C_CSPlayerPawn_m_angEyeAngles = 0;

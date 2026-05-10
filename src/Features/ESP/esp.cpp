@@ -47,6 +47,7 @@
 #include "Features/Radar/Calibration/load_radar_calibration_for_map.inl"
 #include "Features/Radar/Calibration/save_radar_calibration_for_map.inl"
 #include "Features/Radar/Calibration/handle_map_calibration.inl"
+#include "Features/Radar/Calibration/reset_active_map_calibration.inl"
 #include "Worker/dma_health_helpers.inl"
 #include "Worker/try_recover_dma.inl"
 #include "Worker/timing_jitter.inl"

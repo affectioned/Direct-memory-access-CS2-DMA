@@ -270,7 +270,9 @@
     <ClInclude Include="src\Features\ESP\Render\player_offscreen_arrows.inl" />
     <ClInclude Include="src\Features\ESP\Render\player_skeleton.inl" />
     <ClInclude Include="src\Features\ESP\Render\player_snaplines.inl" />
+    <ClInclude Include="src\Features\ESP\DataReader\sound_reads.inl" />
     <ClInclude Include="src\Features\ESP\Render\player_sound.inl" />
+    <ClInclude Include="src\Features\ESP\Render\sound_events.inl" />
     <ClInclude Include="src\Features\ESP\Render\player_weapon_ammo.inl" />
     <ClInclude Include="src\Features\ESP\Render\player_weapon_and_bomb.inl" />
     <ClInclude Include="src\Features\ESP\Render\world_esp.inl" />
@@ -284,6 +286,7 @@
     <ClInclude Include="src\Features\Radar\Calibration\handle_map_calibration.inl" />
     <ClInclude Include="src\Features\Radar\Calibration\ini_helpers.inl" />
     <ClInclude Include="src\Features\Radar\Calibration\load_radar_calibration_for_map.inl" />
+    <ClInclude Include="src\Features\Radar\Calibration\reset_active_map_calibration.inl" />
     <ClInclude Include="src\Features\Radar\Calibration\save_radar_calibration_for_map.inl" />
     <ClInclude Include="src\Features\Radar\Render\radar_overlay.inl" />
   </ItemGroup>

@@ -415,6 +415,9 @@
     <ClInclude Include="src\Features\ESP\DataReader\player_reads.inl">
       <Filter>Inline Files\Features\ESP\DataReader</Filter>
     </ClInclude>
+    <ClInclude Include="src\Features\ESP\DataReader\sound_reads.inl">
+      <Filter>Inline Files\Features\ESP\DataReader</Filter>
+    </ClInclude>
     <ClInclude Include="src\Features\ESP\DataReader\update_data.inl">
       <Filter>Inline Files\Features\ESP\DataReader</Filter>
     </ClInclude>
@@ -463,6 +466,9 @@
     <ClInclude Include="src\Features\ESP\Render\player_sound.inl">
       <Filter>Inline Files\Features\ESP\Render</Filter>
     </ClInclude>
+    <ClInclude Include="src\Features\ESP\Render\sound_events.inl">
+      <Filter>Inline Files\Features\ESP\Render</Filter>
+    </ClInclude>
     <ClInclude Include="src\Features\ESP\Render\player_weapon_ammo.inl">
       <Filter>Inline Files\Features\ESP\Render</Filter>
     </ClInclude>
@@ -500,6 +506,9 @@
       <Filter>Inline Files\Features\Radar\Calibration</Filter>
     </ClInclude>
     <ClInclude Include="src\Features\Radar\Calibration\load_radar_calibration_for_map.inl">
+      <Filter>Inline Files\Features\Radar\Calibration</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Features\Radar\Calibration\reset_active_map_calibration.inl">
       <Filter>Inline Files\Features\Radar\Calibration</Filter>
     </ClInclude>
     <ClInclude Include="src\Features\Radar\Calibration\save_radar_calibration_for_map.inl">

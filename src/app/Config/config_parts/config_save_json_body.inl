@@ -31,6 +31,11 @@
         esp["ShowTeammates"] = g::espShowTeammates;
         esp["OffscreenArrows"] = g::espOffscreenArrows;
         esp["Sound"] = g::espSound;
+        esp["SoundFootsteps"] = g::espSoundFootsteps;
+        esp["SoundShots"] = g::espSoundShots;
+        esp["SoundReloads"] = g::espSoundReloads;
+        esp["SoundRange"] = g::espSoundRange;
+        esp["SoundDuration"] = g::espSoundDuration;
         esp["Flags"] = g::espFlags;
         esp["Item"] = g::espItem;
         esp["FlagBlind"] = g::espFlagBlind;

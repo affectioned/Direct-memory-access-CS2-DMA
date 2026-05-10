@@ -28,6 +28,11 @@
         LoadBool(root, "ESP", "ShowTeammates", g::espShowTeammates);
         LoadBool(root, "ESP", "OffscreenArrows", g::espOffscreenArrows);
         LoadBool(root, "ESP", "Sound", g::espSound);
+        LoadBool(root, "ESP", "SoundFootsteps", g::espSoundFootsteps);
+        LoadBool(root, "ESP", "SoundShots", g::espSoundShots);
+        LoadBool(root, "ESP", "SoundReloads", g::espSoundReloads);
+        LoadFloat(root, "ESP", "SoundRange", g::espSoundRange);
+        LoadFloat(root, "ESP", "SoundDuration", g::espSoundDuration);
         LoadBool(root, "ESP", "Flags", g::espFlags);
         LoadBool(root, "ESP", "Item", g::espItem);
         LoadBool(root, "ESP", "FlagBlind", g::espFlagBlind);

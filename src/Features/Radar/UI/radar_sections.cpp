@@ -2,6 +2,7 @@
 
 #include "app/Core/globals.h"
 #include "app/UI/MenuShell/ui_widgets.h"
+#include "Features/Radar/map_registry.h"
 
 #include <imgui.h>
 
@@ -9,10 +10,9 @@ namespace
 {
     void ResetMapCalibration(ui::IStatusSink& statusSink)
     {
-        g::radarWorldRotationDeg = 0.0f;
-        g::radarWorldScale = 1.0f;
-        g::radarWorldOffsetX = 0.0f;
-        g::radarWorldOffsetY = 0.0f;
+        g::radarSize = 290.0f;
+        g::radarDotSize = 4.0f;
+        radar::ResetActiveMapCalibration();
         statusSink.SetStatus("Radar map calibration reset.");
     }
 }

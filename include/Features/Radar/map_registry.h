@@ -33,5 +33,6 @@ const MapDefinition* ResolveMapByBounds(
     bool allowLooseMatch = true);
 std::string BuildMapKeyFromBounds(double minX, double minY, double maxX, double maxY);
 std::string BuildMapsJson();
+void ResetActiveMapCalibration();
 
 }

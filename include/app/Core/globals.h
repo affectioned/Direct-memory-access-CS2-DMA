@@ -83,6 +83,11 @@ namespace g {
     inline bool& espWorldExplosiveTimer = espSettings.worldExplosiveTimer;
     inline bool& espBombInfo = espSettings.bombInfo;
     inline bool& espSound = espSettings.sound;
+    inline bool& espSoundFootsteps = espSettings.soundFootsteps;
+    inline bool& espSoundShots = espSettings.soundShots;
+    inline bool& espSoundReloads = espSettings.soundReloads;
+    inline float& espSoundRange = espSettings.soundRange;
+    inline float& espSoundDuration = espSettings.soundDuration;
     inline auto& espItemEnabledMask = espSettings.itemEnabledMask;
     inline auto& espBoxColor = espSettings.boxColor;
     inline auto& espHealthColor = espSettings.healthColor;
