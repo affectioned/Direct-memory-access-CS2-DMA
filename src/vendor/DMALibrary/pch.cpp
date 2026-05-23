@@ -142,6 +142,50 @@ namespace
 	void ApplyColorForLevel(DmaLogLevel level, WORD* outOld);
 	void RestoreColor(WORD oldAttributes);
 
+	FILE* OpenLogFile()
+	{
+		char exePath[MAX_PATH] = {};
+		GetModuleFileNameA(nullptr, exePath, MAX_PATH);
+		char* lastSlash = std::strrchr(exePath, '\\');
+		if (lastSlash)
+			*(lastSlash + 1) = '\0';
+		else
+			exePath[0] = '\0';
+		std::strncat(exePath, "kevqdma.log", MAX_PATH - std::strlen(exePath) - 1);
+		FILE* f = nullptr;
+		fopen_s(&f, exePath, "a");
+		return f;
+	}
+
+	FILE* GetLogFile()
+	{
+		static FILE* s_logFile = []() {
+			FILE* f = OpenLogFile();
+			if (f) {
+				SYSTEMTIME st = {};
+				GetLocalTime(&st);
+				std::fprintf(f, "\n--- Session started %04d-%02d-%02d %02d:%02d:%02d ---\n",
+					st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond);
+				std::fflush(f);
+			}
+			return f;
+		}();
+		return s_logFile;
+	}
+
+	void WriteToLogFile(const std::string& message, DmaLogLevel level)
+	{
+		FILE* f = GetLogFile();
+		if (!f)
+			return;
+		SYSTEMTIME st = {};
+		GetLocalTime(&st);
+		std::fprintf(f, "[%02d:%02d:%02d.%03d] | %s | %s\n",
+			st.wHour, st.wMinute, st.wSecond, st.wMilliseconds,
+			LabelForLevel(level), message.c_str());
+		std::fflush(f);
+	}
+
 	void PrintStyledLine(const std::string& message, DmaLogLevel level)
 	{
 		WORD oldAttributes = 0;
@@ -150,6 +194,7 @@ namespace
 		std::printf("| %s | ", LabelForLevel(level));
 		RestoreColor(oldAttributes);
 		std::printf("%s                    \n", message.c_str());
+		WriteToLogFile(message, level);
 	}
 
 	void PrintStyledLine(const std::wstring& message, DmaLogLevel level)

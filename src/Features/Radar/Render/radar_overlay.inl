@@ -198,14 +198,14 @@ if (g::radarEnabled) {
     }
 
     for (int i = 0; i < 64; ++i) {
-        const esp::PlayerData& p = players[i];
+        const visuals::PlayerData& p = players[i];
         if (!p.valid)
             continue;
         if (snap.localPlayerIndex >= 0 && i == snap.localPlayerIndex)
             continue;
         if (snap.localPawn != 0 && p.pawn == snap.localPawn)
             continue;
-        if (!g::espShowTeammates && (localTeam == 2 || localTeam == 3) && p.team == localTeam)
+        if (!g::visualsShowTeammates && (localTeam == 2 || localTeam == 3) && p.team == localTeam)
             continue;
         const Vector3& radarPosPredicted = p.position;
 

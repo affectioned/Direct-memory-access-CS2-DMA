@@ -776,7 +776,7 @@ void WEBRadar::Configure(bool enabled, int intervalMs, uint16_t listenPort, cons
     CloseWebSocketClients();
 }
 
-void WEBRadar::UpdateSnapshot(const esp::WebRadarSnapshot& snapshot)
+void WEBRadar::UpdateSnapshot(const visuals::WebRadarSnapshot& snapshot)
 {
     std::lock_guard<std::mutex> lock(mutex_);
     latestSnapshot_ = snapshot;
@@ -1043,7 +1043,7 @@ std::string WEBRadar::NormalizeMapName(const std::string& rawName)
     return radar::NormalizeMapName(trimmed);
 }
 
-std::string WEBRadar::ResolveMapName(const esp::WebRadarSnapshot& snapshot)
+std::string WEBRadar::ResolveMapName(const visuals::WebRadarSnapshot& snapshot)
 {
     #include "webradar_parts/webradar_resolve_map_name_body.inl"
 }
@@ -1076,12 +1076,12 @@ void ApplySettingsFromGlobals()
 void CaptureFromEsp()
 {
     static uint64_t s_lastCapturedPublishCount = 0;
-    const uint64_t publishCount = esp::GetPublishCount();
+    const uint64_t publishCount = visuals::GetPublishCount();
     if (publishCount == 0 || publishCount == s_lastCapturedPublishCount)
         return;
 
-    esp::WebRadarSnapshot snapshot = {};
-    if (!esp::GetWebRadarSnapshot(&snapshot))
+    visuals::WebRadarSnapshot snapshot = {};
+    if (!visuals::GetWebRadarSnapshot(&snapshot))
         return;
 
     s_lastCapturedPublishCount = publishCount;

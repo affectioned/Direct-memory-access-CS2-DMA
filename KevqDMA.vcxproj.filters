@@ -68,7 +68,7 @@
     <Filter Include="Header Files\assets\icons">
       <UniqueIdentifier>{D19833AE-1E34-4E96-AB56-1B0763C5A6A5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Features\ESP">
+    <Filter Include="Header Files\Features\Visuals">
       <UniqueIdentifier>{3817D3B9-76C9-4AF1-9AB1-E31B28197A0F}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Features\Radar">
@@ -86,7 +86,7 @@
     <Filter Include="Header Files\Game\Schema">
       <UniqueIdentifier>{53E02BD2-77E7-48EE-9536-07E2FA1C154C}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Inline Files\Features\ESP">
+    <Filter Include="Inline Files\Features\Visuals">
       <UniqueIdentifier>{23849359-96D8-496B-8D30-C1F4DBECFA7E}</UniqueIdentifier>
     </Filter>
     <Filter Include="Inline Files\Features\Radar">
@@ -107,7 +107,7 @@
     <Filter Include="Source Files\app\UI">
       <UniqueIdentifier>{9FEC1E5E-62C7-466E-AA62-9906007699CE}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Features\ESP">
+    <Filter Include="Source Files\Features\Visuals">
       <UniqueIdentifier>{D9D4DB2A-38E8-4778-88F7-CE44622B5CF1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Features\Radar">
@@ -134,7 +134,7 @@
     <Filter Include="Header Files\app\UI\MenuShell">
       <UniqueIdentifier>{2006A0CC-A3FD-4895-B9BF-57311973A6AE}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Features\ESP\UI">
+    <Filter Include="Header Files\Features\Visuals\UI">
       <UniqueIdentifier>{53620DCB-DBB3-4E78-A769-379289D79AA1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Features\Radar\UI">
@@ -146,19 +146,19 @@
     <Filter Include="Header Files\Features\WebRadar\UI">
       <UniqueIdentifier>{54790E82-FA9F-494F-8C1E-D871F795B47D}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Inline Files\Features\ESP\Core">
+    <Filter Include="Inline Files\Features\Visuals\Core">
       <UniqueIdentifier>{2AD38C92-5133-4C62-894C-F3B62DB04706}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Inline Files\Features\ESP\DataReader">
+    <Filter Include="Inline Files\Features\Visuals\DataReader">
       <UniqueIdentifier>{A9B6CA77-C6FF-470E-8CD3-66AFC93F0362}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Inline Files\Features\ESP\Helpers">
+    <Filter Include="Inline Files\Features\Visuals\Helpers">
       <UniqueIdentifier>{EB9E2912-4928-4F29-BBA5-BC36D5FA459D}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Inline Files\Features\ESP\Render">
+    <Filter Include="Inline Files\Features\Visuals\Render">
       <UniqueIdentifier>{7136B157-5B7E-4285-BC12-9BF2E8542FEB}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Inline Files\Features\ESP\Worker">
+    <Filter Include="Inline Files\Features\Visuals\Worker">
       <UniqueIdentifier>{BA120C1E-1B92-42A9-B2BF-39FE1FBEE0CD}</UniqueIdentifier>
     </Filter>
     <Filter Include="Inline Files\Features\Radar\Calibration">
@@ -173,7 +173,7 @@
     <Filter Include="Source Files\app\UI\MenuShell">
       <UniqueIdentifier>{534BF067-3B73-4297-9094-E08F43D89718}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Features\ESP\UI">
+    <Filter Include="Source Files\Features\Visuals\UI">
       <UniqueIdentifier>{AFA5D341-B8B4-4FCA-99B1-48B72C21994D}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Features\Radar\UI">
@@ -220,17 +220,17 @@
     <ClCompile Include="src\app\UI\MenuShell\ui_style.cpp">
       <Filter>Source Files\app\UI\MenuShell</Filter>
     </ClCompile>
-    <ClCompile Include="src\Features\ESP\esp.cpp">
-      <Filter>Source Files\Features\ESP</Filter>
+    <ClCompile Include="src\Features\Visuals\visuals.cpp">
+      <Filter>Source Files\Features\Visuals</Filter>
     </ClCompile>
-    <ClCompile Include="src\Features\ESP\UI\esp_preview.cpp">
-      <Filter>Source Files\Features\ESP\UI</Filter>
+    <ClCompile Include="src\Features\Visuals\UI\visuals_preview.cpp">
+      <Filter>Source Files\Features\Visuals\UI</Filter>
     </ClCompile>
-    <ClCompile Include="src\Features\ESP\UI\esp_sections.cpp">
-      <Filter>Source Files\Features\ESP\UI</Filter>
+    <ClCompile Include="src\Features\Visuals\UI\visuals_sections.cpp">
+      <Filter>Source Files\Features\Visuals\UI</Filter>
     </ClCompile>
-    <ClCompile Include="src\Features\ESP\UI\esp_tab.cpp">
-      <Filter>Source Files\Features\ESP\UI</Filter>
+    <ClCompile Include="src\Features\Visuals\UI\visuals_tab.cpp">
+      <Filter>Source Files\Features\Visuals\UI</Filter>
     </ClCompile>
     <ClCompile Include="src\Features\Radar\map_registry.cpp">
       <Filter>Source Files\Features\Radar</Filter>
@@ -334,14 +334,14 @@
     <ClInclude Include="include\app\UI\MenuShell\ui_widgets.h">
       <Filter>Header Files\app\UI\MenuShell</Filter>
     </ClInclude>
-    <ClInclude Include="include\Features\ESP\esp.h">
-      <Filter>Header Files\Features\ESP</Filter>
+    <ClInclude Include="include\Features\Visuals\visuals.h">
+      <Filter>Header Files\Features\Visuals</Filter>
     </ClInclude>
-    <ClInclude Include="include\Features\ESP\UI\esp_sections.h">
-      <Filter>Header Files\Features\ESP\UI</Filter>
+    <ClInclude Include="include\Features\Visuals\UI\visuals_sections.h">
+      <Filter>Header Files\Features\Visuals\UI</Filter>
     </ClInclude>
-    <ClInclude Include="include\Features\ESP\UI\esp_tab.h">
-      <Filter>Header Files\Features\ESP\UI</Filter>
+    <ClInclude Include="include\Features\Visuals\UI\visuals_tab.h">
+      <Filter>Header Files\Features\Visuals\UI</Filter>
     </ClInclude>
     <ClInclude Include="include\Features\Radar\map_registry.h">
       <Filter>Header Files\Features\Radar</Filter>
@@ -376,122 +376,122 @@
     <ClInclude Include="include\Game\Schema\structs.h">
       <Filter>Header Files\Game\Schema</Filter>
     </ClInclude>
-    <ClInclude Include="src\assets\icons\esp_ui_icons.hpp">
+    <ClInclude Include="src\assets\icons\visuals_ui_icons.hpp">
       <Filter>Header Files\assets\icons</Filter>
     </ClInclude>
     <ClInclude Include="src\assets\fonts\weapons.hpp">
       <Filter>Header Files\assets\fonts</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\Core\draw.inl">
-      <Filter>Inline Files\Features\ESP\Core</Filter>
+    <ClInclude Include="src\Features\Visuals\Core\draw.inl">
+      <Filter>Inline Files\Features\Visuals\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\Core\get_web_radar_snapshot.inl">
-      <Filter>Inline Files\Features\ESP\Core</Filter>
+    <ClInclude Include="src\Features\Visuals\Core\get_web_radar_snapshot.inl">
+      <Filter>Inline Files\Features\Visuals\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\Core\state.inl">
-      <Filter>Inline Files\Features\ESP\Core</Filter>
+    <ClInclude Include="src\Features\Visuals\Core\state.inl">
+      <Filter>Inline Files\Features\Visuals\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\DataReader\base_reads.inl">
-      <Filter>Inline Files\Features\ESP\DataReader</Filter>
+    <ClInclude Include="src\Features\Visuals\DataReader\base_reads.inl">
+      <Filter>Inline Files\Features\Visuals\DataReader</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\DataReader\bomb_reads.inl">
-      <Filter>Inline Files\Features\ESP\DataReader</Filter>
+    <ClInclude Include="src\Features\Visuals\DataReader\bomb_reads.inl">
+      <Filter>Inline Files\Features\Visuals\DataReader</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\DataReader\commit_bomb.inl">
-      <Filter>Inline Files\Features\ESP\DataReader</Filter>
+    <ClInclude Include="src\Features\Visuals\DataReader\commit_bomb.inl">
+      <Filter>Inline Files\Features\Visuals\DataReader</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\DataReader\commit_players.inl">
-      <Filter>Inline Files\Features\ESP\DataReader</Filter>
+    <ClInclude Include="src\Features\Visuals\DataReader\commit_players.inl">
+      <Filter>Inline Files\Features\Visuals\DataReader</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\DataReader\commit_state.inl">
-      <Filter>Inline Files\Features\ESP\DataReader</Filter>
+    <ClInclude Include="src\Features\Visuals\DataReader\commit_state.inl">
+      <Filter>Inline Files\Features\Visuals\DataReader</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\DataReader\commit_world.inl">
-      <Filter>Inline Files\Features\ESP\DataReader</Filter>
+    <ClInclude Include="src\Features\Visuals\DataReader\commit_world.inl">
+      <Filter>Inline Files\Features\Visuals\DataReader</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\DataReader\inventory_reads.inl">
-      <Filter>Inline Files\Features\ESP\DataReader</Filter>
+    <ClInclude Include="src\Features\Visuals\DataReader\inventory_reads.inl">
+      <Filter>Inline Files\Features\Visuals\DataReader</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\DataReader\player_reads.inl">
-      <Filter>Inline Files\Features\ESP\DataReader</Filter>
+    <ClInclude Include="src\Features\Visuals\DataReader\player_reads.inl">
+      <Filter>Inline Files\Features\Visuals\DataReader</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\DataReader\sound_reads.inl">
-      <Filter>Inline Files\Features\ESP\DataReader</Filter>
+    <ClInclude Include="src\Features\Visuals\DataReader\sound_reads.inl">
+      <Filter>Inline Files\Features\Visuals\DataReader</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\DataReader\update_data.inl">
-      <Filter>Inline Files\Features\ESP\DataReader</Filter>
+    <ClInclude Include="src\Features\Visuals\DataReader\update_data.inl">
+      <Filter>Inline Files\Features\Visuals\DataReader</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\DataReader\world_reads.inl">
-      <Filter>Inline Files\Features\ESP\DataReader</Filter>
+    <ClInclude Include="src\Features\Visuals\DataReader\world_reads.inl">
+      <Filter>Inline Files\Features\Visuals\DataReader</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\Helpers\basic_helpers.inl">
-      <Filter>Inline Files\Features\ESP\Helpers</Filter>
+    <ClInclude Include="src\Features\Visuals\Helpers\basic_helpers.inl">
+      <Filter>Inline Files\Features\Visuals\Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\Helpers\draw_corner_box.inl">
-      <Filter>Inline Files\Features\ESP\Helpers</Filter>
+    <ClInclude Include="src\Features\Visuals\Helpers\draw_corner_box.inl">
+      <Filter>Inline Files\Features\Visuals\Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\Helpers\draw_text_shadow.inl">
-      <Filter>Inline Files\Features\ESP\Helpers</Filter>
+    <ClInclude Include="src\Features\Visuals\Helpers\draw_text_shadow.inl">
+      <Filter>Inline Files\Features\Visuals\Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\Helpers\project_world_aabb_to_screen.inl">
-      <Filter>Inline Files\Features\ESP\Helpers</Filter>
+    <ClInclude Include="src\Features\Visuals\Helpers\project_world_aabb_to_screen.inl">
+      <Filter>Inline Files\Features\Visuals\Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\Helpers\weapon_lookup.inl">
-      <Filter>Inline Files\Features\ESP\Helpers</Filter>
+    <ClInclude Include="src\Features\Visuals\Helpers\weapon_lookup.inl">
+      <Filter>Inline Files\Features\Visuals\Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\Render\bomb_esp.inl">
-      <Filter>Inline Files\Features\ESP\Render</Filter>
+    <ClInclude Include="src\Features\Visuals\Render\bomb_visuals.inl">
+      <Filter>Inline Files\Features\Visuals\Render</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\Render\player_box.inl">
-      <Filter>Inline Files\Features\ESP\Render</Filter>
+    <ClInclude Include="src\Features\Visuals\Render\player_box.inl">
+      <Filter>Inline Files\Features\Visuals\Render</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\Render\player_flags.inl">
-      <Filter>Inline Files\Features\ESP\Render</Filter>
+    <ClInclude Include="src\Features\Visuals\Render\player_flags.inl">
+      <Filter>Inline Files\Features\Visuals\Render</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\Render\player_health_armor.inl">
-      <Filter>Inline Files\Features\ESP\Render</Filter>
+    <ClInclude Include="src\Features\Visuals\Render\player_health_armor.inl">
+      <Filter>Inline Files\Features\Visuals\Render</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\Render\player_name.inl">
-      <Filter>Inline Files\Features\ESP\Render</Filter>
+    <ClInclude Include="src\Features\Visuals\Render\player_name.inl">
+      <Filter>Inline Files\Features\Visuals\Render</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\Render\player_offscreen_arrows.inl">
-      <Filter>Inline Files\Features\ESP\Render</Filter>
+    <ClInclude Include="src\Features\Visuals\Render\player_offscreen_arrows.inl">
+      <Filter>Inline Files\Features\Visuals\Render</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\Render\player_skeleton.inl">
-      <Filter>Inline Files\Features\ESP\Render</Filter>
+    <ClInclude Include="src\Features\Visuals\Render\player_skeleton.inl">
+      <Filter>Inline Files\Features\Visuals\Render</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\Render\player_snaplines.inl">
-      <Filter>Inline Files\Features\ESP\Render</Filter>
+    <ClInclude Include="src\Features\Visuals\Render\player_snaplines.inl">
+      <Filter>Inline Files\Features\Visuals\Render</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\Render\player_sound.inl">
-      <Filter>Inline Files\Features\ESP\Render</Filter>
+    <ClInclude Include="src\Features\Visuals\Render\player_sound.inl">
+      <Filter>Inline Files\Features\Visuals\Render</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\Render\sound_events.inl">
-      <Filter>Inline Files\Features\ESP\Render</Filter>
+    <ClInclude Include="src\Features\Visuals\Render\sound_events.inl">
+      <Filter>Inline Files\Features\Visuals\Render</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\Render\player_weapon_ammo.inl">
-      <Filter>Inline Files\Features\ESP\Render</Filter>
+    <ClInclude Include="src\Features\Visuals\Render\player_weapon_ammo.inl">
+      <Filter>Inline Files\Features\Visuals\Render</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\Render\player_weapon_and_bomb.inl">
-      <Filter>Inline Files\Features\ESP\Render</Filter>
+    <ClInclude Include="src\Features\Visuals\Render\player_weapon_and_bomb.inl">
+      <Filter>Inline Files\Features\Visuals\Render</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\Render\world_esp.inl">
-      <Filter>Inline Files\Features\ESP\Render</Filter>
+    <ClInclude Include="src\Features\Visuals\Render\world_visuals.inl">
+      <Filter>Inline Files\Features\Visuals\Render</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\Worker\camera_worker_loop.inl">
-      <Filter>Inline Files\Features\ESP\Worker</Filter>
+    <ClInclude Include="src\Features\Visuals\Worker\camera_worker_loop.inl">
+      <Filter>Inline Files\Features\Visuals\Worker</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\Worker\data_worker_loop.inl">
-      <Filter>Inline Files\Features\ESP\Worker</Filter>
+    <ClInclude Include="src\Features\Visuals\Worker\data_worker_loop.inl">
+      <Filter>Inline Files\Features\Visuals\Worker</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\Worker\dma_health_helpers.inl">
-      <Filter>Inline Files\Features\ESP\Worker</Filter>
+    <ClInclude Include="src\Features\Visuals\Worker\dma_health_helpers.inl">
+      <Filter>Inline Files\Features\Visuals\Worker</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\Worker\try_recover_dma.inl">
-      <Filter>Inline Files\Features\ESP\Worker</Filter>
+    <ClInclude Include="src\Features\Visuals\Worker\try_recover_dma.inl">
+      <Filter>Inline Files\Features\Visuals\Worker</Filter>
     </ClInclude>
-    <ClInclude Include="src\Features\ESP\Worker\worker_lifecycle.inl">
-      <Filter>Inline Files\Features\ESP\Worker</Filter>
+    <ClInclude Include="src\Features\Visuals\Worker\worker_lifecycle.inl">
+      <Filter>Inline Files\Features\Visuals\Worker</Filter>
     </ClInclude>
     <ClInclude Include="src\Features\Radar\Calibration\build_map_key_from_bounds.inl">
       <Filter>Inline Files\Features\Radar\Calibration</Filter>

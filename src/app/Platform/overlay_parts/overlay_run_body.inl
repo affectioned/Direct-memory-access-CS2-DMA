@@ -48,7 +48,7 @@
         webradar::ApplySettingsFromGlobals();
         webradar::CaptureFromEsp();
 
-        esp::Draw();
+        visuals::Draw();
 
         ui::RenderMenu();
 

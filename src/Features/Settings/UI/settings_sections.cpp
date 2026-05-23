@@ -4,7 +4,7 @@
 #include "app/UI/MenuShell/menu_utils.h"
 #include "app/UI/MenuShell/ui_widgets.h"
 #include "app/Config/config.h"
-#include "Features/ESP/esp.h"
+#include "Features/Visuals/visuals.h"
 
 #include <algorithm>
 #include <cmath>
@@ -144,8 +144,8 @@ void ui::tabs::settings_sections::RenderDebugWindow(bool* open)
         return;
     }
 
-    const auto health = esp::GetDmaHealthStats();
-    const auto debug = esp::GetDebugStats();
+    const auto health = visuals::GetDmaHealthStats();
+    const auto debug = visuals::GetDebugStats();
     const auto& st = debug.stages;
     static double s_lastCopyTime = 0.0;
 
@@ -155,19 +155,19 @@ void ui::tabs::settings_sections::RenderDebugWindow(bool* open)
     auto statusBadge = [](bool value, ImVec4 okColor, ImVec4 badColor) -> ImVec4 {
         return value ? okColor : badColor;
     };
-    auto subsystemStateLabel = [](esp::SubsystemHealthState state) -> const char* {
+    auto subsystemStateLabel = [](visuals::SubsystemHealthState state) -> const char* {
         switch (state) {
-        case esp::SubsystemHealthState::Healthy: return "healthy";
-        case esp::SubsystemHealthState::Degraded: return "degraded";
-        case esp::SubsystemHealthState::Failed: return "failed";
+        case visuals::SubsystemHealthState::Healthy: return "healthy";
+        case visuals::SubsystemHealthState::Degraded: return "degraded";
+        case visuals::SubsystemHealthState::Failed: return "failed";
         default: return "unknown";
         }
     };
-    auto subsystemStateColor = [](esp::SubsystemHealthState state) -> ImVec4 {
+    auto subsystemStateColor = [](visuals::SubsystemHealthState state) -> ImVec4 {
         switch (state) {
-        case esp::SubsystemHealthState::Healthy: return ImVec4(0.30f, 0.86f, 0.30f, 1.0f);
-        case esp::SubsystemHealthState::Degraded: return ImVec4(0.95f, 0.76f, 0.24f, 1.0f);
-        case esp::SubsystemHealthState::Failed: return ImVec4(1.0f, 0.40f, 0.30f, 1.0f);
+        case visuals::SubsystemHealthState::Healthy: return ImVec4(0.30f, 0.86f, 0.30f, 1.0f);
+        case visuals::SubsystemHealthState::Degraded: return ImVec4(0.95f, 0.76f, 0.24f, 1.0f);
+        case visuals::SubsystemHealthState::Failed: return ImVec4(1.0f, 0.40f, 0.30f, 1.0f);
         default: return ImVec4(0.62f, 0.62f, 0.66f, 1.0f);
         }
     };
@@ -243,10 +243,10 @@ void ui::tabs::settings_sections::RenderDebugWindow(bool* open)
 
     
     {
-        if (health.gameStatus == esp::GameStatus::Ok) {
+        if (health.gameStatus == visuals::GameStatus::Ok) {
             statusLabel = "OK";
             statusColor = ImVec4(0.3f, 0.86f, 0.3f, 1.0f);
-        } else if (health.gameStatus == esp::GameStatus::WaitCs2) {
+        } else if (health.gameStatus == visuals::GameStatus::WaitCs2) {
             statusLabel = "Waiting for CS2";
             statusColor = ImVec4(0.86f, 0.7f, 0.24f, 1.0f);
         }
@@ -528,13 +528,13 @@ void ui::tabs::settings_sections::RenderDebugWindow(bool* open)
     else if (debug.bombDropped)
         bombStateLabel = "Dropped";
 
-    auto warmupStateLabel = [](esp::SceneWarmupState state) -> const char* {
+    auto warmupStateLabel = [](visuals::SceneWarmupState state) -> const char* {
         switch (state) {
-        case esp::SceneWarmupState::ColdAttach: return "cold_attach";
-        case esp::SceneWarmupState::SceneTransition: return "scene_transition";
-        case esp::SceneWarmupState::HierarchyWarming: return "hierarchy_warming";
-        case esp::SceneWarmupState::Stable: return "stable";
-        case esp::SceneWarmupState::Recovery: return "recovery";
+        case visuals::SceneWarmupState::ColdAttach: return "cold_attach";
+        case visuals::SceneWarmupState::SceneTransition: return "scene_transition";
+        case visuals::SceneWarmupState::HierarchyWarming: return "hierarchy_warming";
+        case visuals::SceneWarmupState::Stable: return "stable";
+        case visuals::SceneWarmupState::Recovery: return "recovery";
         default: return "unknown";
         }
     };
@@ -774,7 +774,7 @@ void ui::tabs::settings_sections::RenderDebugWindow(bool* open)
 
     ImGui::Dummy(ImVec2(0.0f, 8.0f));
     if (ImGui::Button("Refresh Cache Data", ImVec2(ImGui::GetContentRegionAvail().x, 30.0f))) {
-        esp::RequestCacheRefresh();
+        visuals::RequestCacheRefresh();
     }
 
     ImGui::End();
