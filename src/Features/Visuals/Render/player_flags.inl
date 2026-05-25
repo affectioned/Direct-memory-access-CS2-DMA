@@ -1,4 +1,4 @@
-﻿if (g::visualsFlags || g::visualsDistance) {
+if (g::visualsFlags || g::visualsDistance) {
     const float flagStartX = boxLeft + boxWidth + 6.0f;
     float flagY = boxTop;
     char moneyBuf[16] = {};

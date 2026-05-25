@@ -1,4 +1,4 @@
-﻿#include "app/Core/globals.h"
+#include "app/Core/globals.h"
 #include "Features/Visuals/visuals.h"
 
 #include <algorithm>

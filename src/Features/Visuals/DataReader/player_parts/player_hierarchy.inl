@@ -1,4 +1,4 @@
-﻿        auto isValidPawnHandle = [&](uint32_t handleValue) -> bool {
+        auto isValidPawnHandle = [&](uint32_t handleValue) -> bool {
             const uint32_t slot = handleValue & kEntityHandleMask;
             return handleValue != 0u &&
                    handleValue != 0xFFFFFFFFu &&

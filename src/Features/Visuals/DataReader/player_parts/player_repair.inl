@@ -1,4 +1,4 @@
-﻿    {
+    {
         static uint64_t s_coreRepairResetSerial = 0;
         static uint8_t s_coreRepairStreaks[64] = {};
         static uint64_t s_coreRepairBadSinceUs[64] = {};

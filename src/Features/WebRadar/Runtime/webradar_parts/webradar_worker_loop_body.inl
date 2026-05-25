@@ -1,4 +1,4 @@
-﻿    std::string stickyMapName;
+    std::string stickyMapName;
     uint64_t stickyMapStampMs = 0;
     uint64_t frameSeq = 0;
     int nextWaitMs = 16;
@@ -71,7 +71,7 @@
                 latestPayloadJson_ = payloadJson;
                 ++latestPayloadVersion_;
                 stats_.statusText = stats_.serverListening
-                    ? (settings.enabled ? "Server listening, waiting for ESP snapshot" : "Server listening, WEBRadar disabled")
+                    ? (settings.enabled ? "Server listening, waiting for Visuals snapshot" : "Server listening, WEBRadar disabled")
                     : (settings.enabled ? "Waiting for HTTP listener" : "WEBRadar disabled");
             }
             cv_.notify_all();

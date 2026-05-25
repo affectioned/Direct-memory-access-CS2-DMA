@@ -1,4 +1,4 @@
-﻿#include "Features/WebRadar/webradar.h"
+#include "Features/WebRadar/webradar.h"
 #include "Features/WebRadar/embedded_assets.h"
 #include "Features/Radar/map_registry.h"
 #include "app/Core/globals.h"

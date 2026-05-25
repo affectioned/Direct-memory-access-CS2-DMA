@@ -1,4 +1,4 @@
-﻿#include "app/Core/build_info.h"
+#include "app/Core/build_info.h"
 #include "app/UI/MenuShell/menu_controller.h"
 
 #include "app/Config/config.h"

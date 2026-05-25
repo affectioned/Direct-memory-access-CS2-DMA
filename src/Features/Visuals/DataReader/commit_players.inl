@@ -1,4 +1,4 @@
-﻿        static uint64_t s_commitPlayerResetSerial = 0;
+        static uint64_t s_commitPlayerResetSerial = 0;
         static uint64_t s_zeroPawnSinceUs[64] = {};
         static uint64_t s_coreInvalidSinceUs[64] = {};
         static uint64_t s_deadReadSinceUs[64] = {};

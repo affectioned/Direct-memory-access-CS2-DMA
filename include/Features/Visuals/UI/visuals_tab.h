@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include "app/UI/MenuShell/tab_page.h"
 

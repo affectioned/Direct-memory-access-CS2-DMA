@@ -1,4 +1,4 @@
-﻿    const uint64_t nowUs = TickNowUs();
+    const uint64_t nowUs = TickNowUs();
     const uint64_t nowMs = nowUs / 1000u;
 
     uint16_t previewLocalWeaponId = s_localWeaponId;

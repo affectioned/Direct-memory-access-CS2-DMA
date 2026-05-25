@@ -1,4 +1,4 @@
-﻿
+
 if (g::radarEnabled) {
     const bool radarStaticMode = (g::radarMode != 0);
     const float staticFlipX = g::radarStaticFlipX ? -1.0f : 1.0f;

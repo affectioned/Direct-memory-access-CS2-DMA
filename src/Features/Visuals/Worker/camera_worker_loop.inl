@@ -1,4 +1,4 @@
-﻿namespace {
+namespace {
     void CameraWorkerLoop()
     {
         using Clock = std::chrono::steady_clock;

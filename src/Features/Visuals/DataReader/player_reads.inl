@@ -1,4 +1,4 @@
-﻿    uintptr_t controllers[64] = {};
+    uintptr_t controllers[64] = {};
     uint32_t pawnHandles[64] = {};
     char names[64][128] = {};
     uint32_t pings[64] = {};

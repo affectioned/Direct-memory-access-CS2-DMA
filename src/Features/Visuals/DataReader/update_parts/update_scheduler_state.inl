@@ -1,4 +1,4 @@
-﻿    int lastTrackedPlayerSlotHint = 0;
+    int lastTrackedPlayerSlotHint = 0;
     for (int i = 63; i >= 0; --i) {
         if ((s_players[i].valid || s_players[i].pawn != 0) ||
             (s_webRadarPlayers[i].valid || s_webRadarPlayers[i].pawn != 0)) {

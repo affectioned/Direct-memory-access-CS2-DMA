@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 namespace visuals::style {
     constexpr float kBombDefuseKitSeconds = 5.0f;

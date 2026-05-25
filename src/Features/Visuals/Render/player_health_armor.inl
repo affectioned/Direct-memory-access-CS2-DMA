@@ -1,4 +1,4 @@
-﻿struct CompactBarLabel {
+struct CompactBarLabel {
     bool active = false;
     char text[8] = {};
     ImVec2 textPos = {};

@@ -1,4 +1,4 @@
-﻿namespace {
+namespace {
 DWORD_PTR BuildWorkerAffinityMask(unsigned backFromLastCore)
 {
     constexpr unsigned kMaskBits = static_cast<unsigned>(sizeof(DWORD_PTR) * 8u);

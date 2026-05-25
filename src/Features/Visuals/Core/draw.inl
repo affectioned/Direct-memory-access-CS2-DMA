@@ -1,4 +1,4 @@
-﻿#include "Features/Visuals/Render/style.h"
+#include "Features/Visuals/Render/style.h"
 
 void visuals::Draw()
 {

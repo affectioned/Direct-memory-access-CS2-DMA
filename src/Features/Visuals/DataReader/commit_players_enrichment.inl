@@ -1,4 +1,4 @@
-﻿        static uintptr_t s_cachedNoKnifePrimaryPawns[64] = {};
+        static uintptr_t s_cachedNoKnifePrimaryPawns[64] = {};
         static uint16_t s_cachedNoKnifePrimaryIconIds[64] = {};
         for (int i = 0; i < 64; ++i) {
             if (s_cachedNoKnifePrimaryPawns[i] == pawns[i])

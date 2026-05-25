@@ -1,4 +1,4 @@
-﻿static void MarkDmaReadFailure()
+static void MarkDmaReadFailure()
 {
     s_dmaTotalFailures.fetch_add(1, std::memory_order_relaxed);
     s_dmaConsecutiveFailures.fetch_add(1, std::memory_order_relaxed);

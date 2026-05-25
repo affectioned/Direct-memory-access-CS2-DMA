@@ -1,4 +1,4 @@
-﻿if (g::visualsSkeleton) {
+if (g::visualsSkeleton) {
     const ImU32 skeletonRenderCol = g::visualsVisibilityColoring ? entityCol : skelCol;
     const int leftToeBoneId = selectToeBoneId(p, true);
     const int rightToeBoneId = selectToeBoneId(p, false);

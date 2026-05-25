@@ -1,4 +1,4 @@
-﻿#include "app/Platform/overlay.h"
+#include "app/Platform/overlay.h"
 #include "app/Core/build_info.h"
 #include "app/Core/globals.h"
 #include "app/Config/project_paths.h"

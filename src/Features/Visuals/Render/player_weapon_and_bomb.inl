@@ -1,4 +1,4 @@
-﻿
+
 if (g::visualsWeapon) {
     bottomTextY += 2.0f;
     

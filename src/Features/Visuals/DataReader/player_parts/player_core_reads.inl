@@ -1,4 +1,4 @@
-﻿    const uint64_t coreNowUs = TickNowUs();
+    const uint64_t coreNowUs = TickNowUs();
     constexpr uint64_t kCoreTeamRefreshIntervalUs = 250000;
     const bool previousLocalTeamValid = (s_localTeam == 2 || s_localTeam == 3);
     int currentResolvedLocalTeam = 0;

@@ -1,4 +1,4 @@
-﻿    static uint32_t s_requiredReadFailureCount = 0;
+    static uint32_t s_requiredReadFailureCount = 0;
 
     auto statusToString = [](visuals::GameStatus status) -> const char* {
         switch (status) {

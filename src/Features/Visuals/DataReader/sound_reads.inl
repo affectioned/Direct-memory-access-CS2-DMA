@@ -1,4 +1,4 @@
-﻿{
+{
     auto soundIsEnemyAlive = [&](int idx) -> bool {
         if (idx < 0 || idx >= 64) return false;
         if (!pawns[idx]) return false;

@@ -1,4 +1,4 @@
-﻿if (g::visualsBombInfo && g::visualsBombTime) {
+if (g::visualsBombInfo && g::visualsBombTime) {
     constexpr float kBombTimerMaxSeconds = 40.0f;
     constexpr float kBombTimerMinSeconds = 5.0f;
     constexpr float kBombTimerHardMaxSeconds = 90.0f;

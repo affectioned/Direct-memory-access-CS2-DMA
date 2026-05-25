@@ -1,4 +1,4 @@
-﻿    
+    
     bool worldScanFoundC4 = false;
     uintptr_t worldScanC4Entity = 0;
     Vector3 worldScanC4Pos = {};

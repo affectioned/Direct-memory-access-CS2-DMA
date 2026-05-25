@@ -1,4 +1,4 @@
-﻿if (g::visualsSound) {
+if (g::visualsSound) {
     const float durationSec = std::clamp(g::visualsSoundDuration, 0.25f, 5.0f);
     const float rangeWorld = std::clamp(g::visualsSoundRange, 100.0f, 6000.0f);
     const uint64_t durationUs = static_cast<uint64_t>(durationSec * 1000000.0f);

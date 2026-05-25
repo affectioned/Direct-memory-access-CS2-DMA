@@ -1,4 +1,4 @@
-﻿if (g::visualsWeapon && g::visualsWeaponAmmo && p.weaponId != 0 && p.ammoClip >= 0) {
+if (g::visualsWeapon && g::visualsWeaponAmmo && p.weaponId != 0 && p.ammoClip >= 0) {
     const bool grenadeLike = (p.weaponId >= 43 && p.weaponId <= 48);
     if (grenadeLike) {
         drawBottomLabel("GRENADE", IM_COL32(220, 220, 220, 245), false, true, g::fontComicSans, 0.0f);

@@ -1,4 +1,4 @@
-﻿if (g::visualsEnabled && g::visualsBombInfo && (bombState.planted || bombState.dropped)) {
+if (g::visualsEnabled && g::visualsBombInfo && (bombState.planted || bombState.dropped)) {
     const bool plantedBomb = bombState.planted;
     const bool blowTimerValid =
         std::isfinite(bombState.blowTime) &&

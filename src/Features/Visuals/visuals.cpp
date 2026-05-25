@@ -1,4 +1,4 @@
-﻿#include "Features/Visuals/visuals.h"
+#include "Features/Visuals/visuals.h"
 #include "app/Config/config.h"
 #include "app/Core/globals.h"
 #include "app/Config/project_paths.h"

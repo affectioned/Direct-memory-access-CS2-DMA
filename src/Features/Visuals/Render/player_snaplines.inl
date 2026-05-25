@@ -1,4 +1,4 @@
-﻿if (g::visualsSnaplines) {
+if (g::visualsSnaplines) {
     float originY = g::visualsSnaplineFromTop ? 0.0f : screenH;
     const ImVec2 from(screenW * 0.5f, originY);
     const ImVec2 to(screenFeet.x, screenFeet.y);

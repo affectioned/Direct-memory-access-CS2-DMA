@@ -1,4 +1,4 @@
-﻿#include "Features/Settings/UI/settings_sections.h"
+#include "Features/Settings/UI/settings_sections.h"
 
 #include "app/Core/globals.h"
 #include "app/UI/MenuShell/menu_utils.h"

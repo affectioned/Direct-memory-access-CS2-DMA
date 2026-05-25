@@ -1,4 +1,4 @@
-﻿#include "app/Config/config.h"
+#include "app/Config/config.h"
 #include "app/Core/globals.h"
 #include "app/Config/project_paths.h"
 #include "app/Config/user_state.h"

@@ -1,4 +1,4 @@
-﻿    static int s_lastResolvedBombCarrierSlot = -1;
+    static int s_lastResolvedBombCarrierSlot = -1;
     static uint64_t s_lastResolvedBombCarrierUs = 0;
     static uint64_t s_bombCarrierCacheResetEpoch = 0;
     const uint64_t bombCarrierEpoch = s_bombEpoch.load(std::memory_order_relaxed);

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "Game/Schema/structs.h"
 #include <array>
 #include <cstdint>

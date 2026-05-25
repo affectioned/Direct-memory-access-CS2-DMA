@@ -1,4 +1,4 @@
-﻿    static uint64_t s_lastPlayerIdentityAuxUs = 0;
+    static uint64_t s_lastPlayerIdentityAuxUs = 0;
     static uint64_t s_lastPlayerMoneyAuxUs = 0;
     static uint64_t s_lastPlayerStatusAuxUs = 0;
     static uint64_t s_lastPlayerDefuserAuxUs = 0;

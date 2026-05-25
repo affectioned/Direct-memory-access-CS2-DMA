@@ -1,4 +1,4 @@
-﻿        json root = json::object();
+        json root = json::object();
 
         json& visuals = EnsureSection(root, "Visuals");
         visuals["Enabled"] = g::visualsEnabled;

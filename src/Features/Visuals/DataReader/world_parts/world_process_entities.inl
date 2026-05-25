@@ -1,4 +1,4 @@
-﻿        if (worldScanOk && worldPositionsOk) {
+        if (worldScanOk && worldPositionsOk) {
         worldScanCommitted = true;
         int unknownUtilityProbeCount = 0;
         static thread_local int16_t s_worldPawnOwnerBySlot[kMaxTrackedWorldEntities + 1];

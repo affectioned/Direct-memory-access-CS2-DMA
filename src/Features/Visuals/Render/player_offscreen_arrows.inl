@@ -1,4 +1,4 @@
-﻿if (g::visualsOffscreenArrows) {
+if (g::visualsOffscreenArrows) {
     const float dx = renderPlayerPos.x - renderLocalPos.x;
     const float dy = renderPlayerPos.y - renderLocalPos.y;
     const float relForward = dx * yawCos + dy * yawSin;

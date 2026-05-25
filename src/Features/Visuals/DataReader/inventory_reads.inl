@@ -1,4 +1,4 @@
-﻿    static uintptr_t s_cachedActiveWeaponEntries[64] = {};
+    static uintptr_t s_cachedActiveWeaponEntries[64] = {};
     static uintptr_t s_cachedInventoryWeaponEntries[64][kMaxInventoryWeapons] = {};
     static uintptr_t s_cachedWeaponServicesResolved[64] = {};
     static uint32_t s_cachedActiveWeaponHandles[64] = {};

@@ -1,4 +1,4 @@
-﻿    int localTeam = s_localTeam;
+    int localTeam = s_localTeam;
     bool localTeamLiveResolved = false;
     int localControllerTeam = 0;
     uint32_t localControllerPawnHandle = 0;

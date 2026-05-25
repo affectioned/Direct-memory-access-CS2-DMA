@@ -1,4 +1,4 @@
-﻿if (g::visualsEnabled && (g::visualsWorld || g::visualsItem)) {
+if (g::visualsEnabled && (g::visualsWorld || g::visualsItem)) {
     for (int i = 0; i < worldMarkerCount; ++i) {
         const WorldMarker& marker = worldMarkers[i];
         if (!marker.valid)

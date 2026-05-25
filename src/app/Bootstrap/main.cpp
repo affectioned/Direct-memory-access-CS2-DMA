@@ -1,4 +1,4 @@
-﻿#include <Windows.h>
+#include <Windows.h>
 #include <timeapi.h>
 #pragma comment(lib, "winmm.lib")
 #include <DMALibrary/Memory/Memory.h>

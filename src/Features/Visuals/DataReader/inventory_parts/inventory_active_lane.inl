@@ -1,4 +1,4 @@
-﻿    if (activeWeaponLaneDue) {
+    if (activeWeaponLaneDue) {
         auto resolveActiveWeaponEntity = [&](int idx) -> uintptr_t {
             if (idx < 0 || idx >= 64)
                 return 0;

@@ -1,4 +1,4 @@
-﻿
+
 if (g::visualsName && p.name[0] != '\0') {
     ImFont* nameFont = GetVisualsNameFont();
     const float nameFontSize = (g::visualsNameFontSize > 4.0f) ? g::visualsNameFontSize : ImGui::GetFontSize();

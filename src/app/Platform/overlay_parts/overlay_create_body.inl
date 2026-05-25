@@ -1,4 +1,4 @@
-﻿    const HINSTANCE hInst = GetModuleHandleW(nullptr);
+    const HINSTANCE hInst = GetModuleHandleW(nullptr);
     const HICON hIcon = LoadIconW(hInst, L"IDI_APPICON");
 
     WNDCLASSEXW wc = {};

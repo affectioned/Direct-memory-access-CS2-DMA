@@ -1,4 +1,4 @@
-﻿bool visuals::GetWebRadarSnapshot(WebRadarSnapshot* outSnapshot)
+bool visuals::GetWebRadarSnapshot(WebRadarSnapshot* outSnapshot)
 {
     if (!outSnapshot)
         return false;

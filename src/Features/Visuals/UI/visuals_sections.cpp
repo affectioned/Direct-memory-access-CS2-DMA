@@ -1,4 +1,4 @@
-﻿#include "Features/Visuals/UI/visuals_sections.h"
+#include "Features/Visuals/UI/visuals_sections.h"
 
 #include "app/Core/globals.h"
 

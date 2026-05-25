@@ -1,4 +1,4 @@
-﻿
+
 if (g::visualsBox) {
     float cornerLen = boxHeight * 0.25f;
     if (cornerLen < 5.0f) cornerLen = 5.0f;

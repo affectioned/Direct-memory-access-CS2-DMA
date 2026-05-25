@@ -1,4 +1,4 @@
-﻿        const int bombCommitSignOnState = s_engineSignOnState.load(std::memory_order_relaxed);
+        const int bombCommitSignOnState = s_engineSignOnState.load(std::memory_order_relaxed);
         const bool bombCommitLiveContext =
             s_engineInGame.load(std::memory_order_relaxed) &&
             !s_engineMenu.load(std::memory_order_relaxed) &&

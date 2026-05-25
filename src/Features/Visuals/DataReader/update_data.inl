@@ -1,4 +1,4 @@
-﻿#include "Features/Visuals/DataReader/intervals.h"
+#include "Features/Visuals/DataReader/intervals.h"
 
 bool visuals::UpdateData()
 {

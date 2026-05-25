@@ -1,4 +1,4 @@
-﻿    if (fullInventoryLaneDue) {
+    if (fullInventoryLaneDue) {
         bool queuedInventoryHandleReads = false;
         for (int inventorySlotIdx = 0; inventorySlotIdx < inventoryPlayerSlotCount; ++inventorySlotIdx) {
             const int i = inventoryPlayerSlots[inventorySlotIdx];
