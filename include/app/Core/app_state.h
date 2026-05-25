@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <bitset>
 #include <cstdint>
@@ -19,7 +19,7 @@ namespace app::state {
         return id >= 500 && id <= 526;
     }
 
-    inline std::bitset<1200> CreateDefaultItemEspMask()
+    inline std::bitset<1200> CreateDefaultItemVisualsMask()
     {
         std::bitset<1200> mask;
         mask.set();
@@ -45,7 +45,7 @@ namespace app::state {
         bool menuOpen = true;
     };
 
-    struct EspSettings {
+    struct VisualsSettings {
         bool enabled = true;
         bool box = true;
         bool health = true;
@@ -104,7 +104,7 @@ namespace app::state {
         bool soundReloads = true;
         float soundRange = 1500.0f;
         float soundDuration = 1.5f;
-        std::bitset<1200> itemEnabledMask = CreateDefaultItemEspMask();
+        std::bitset<1200> itemEnabledMask = CreateDefaultItemVisualsMask();
         float boxColor[4] = { 1.0f, 0.20f, 0.20f, 1.0f };
         float healthColor[4] = { 0.25f, 0.95f, 0.35f, 1.0f };
         float visibleColor[4] = { 1.0f, 0.20f, 0.20f, 1.0f };
@@ -175,9 +175,9 @@ namespace app::state {
         ImFont* fontWeaponIcons = nullptr;
     };
 
-    struct EspUiIconState {
-        uintptr_t enableEsp = 0;
-        uintptr_t espPreview = 0;
+    struct VisualsUiIconState {
+        uintptr_t enableVisuals = 0;
+        uintptr_t visualsPreview = 0;
         uintptr_t cornerBox = 0;
         uintptr_t healthBar = 0;
         uintptr_t armorBar = 0;
@@ -186,19 +186,19 @@ namespace app::state {
         uintptr_t skeleton = 0;
         uintptr_t snapLines = 0;
         uintptr_t playerFlags = 0;
-        uintptr_t worldEsp = 0;
-        uintptr_t bombEsp = 0;
+        uintptr_t worldVisuals = 0;
+        uintptr_t bombVisuals = 0;
     };
 
     struct AppState {
         DisplaySettings display = {};
         RuntimeState runtime = {};
-        EspSettings esp = {};
+        VisualsSettings visuals = {};
         RadarSettings radar = {};
         WebRadarSettings webRadar = {};
         UiSettings ui = {};
         FontState fonts = {};
-        EspUiIconState espUiIcons = {};
+        VisualsUiIconState visualsUiIcons = {};
     };
 
     inline AppState globalState = {};

@@ -1,4 +1,4 @@
-#include <Windows.h>
+﻿#include <Windows.h>
 #include <timeapi.h>
 #pragma comment(lib, "winmm.lib")
 #include <DMALibrary/Memory/Memory.h>
@@ -8,7 +8,7 @@
 #include "app/Core/build_info.h"
 #include "app/Core/globals.h"
 #include "app/Platform/overlay.h"
-#include "Features/ESP/esp.h"
+#include "Features/Visuals/visuals.h"
 #include "Features/WebRadar/webradar.h"
 #include "Game/Offsets/runtime_offsets.h"
 
@@ -113,14 +113,14 @@ namespace
         return "Last: " + previousDisplay + " -> New Last: " + currentDisplay;
     }
 
-    void WarmUpEspSnapshot()
+    void WarmUpVisualsSnapshot()
     {
         constexpr auto kWarmupBudget = std::chrono::milliseconds(450);
         constexpr auto kWarmupRetryDelay = std::chrono::milliseconds(18);
 
         const auto deadline = std::chrono::steady_clock::now() + kWarmupBudget;
         do {
-            if (esp::UpdateData())
+            if (visuals::UpdateData())
                 return;
             std::this_thread::sleep_for(kWarmupRetryDelay);
         } while (std::chrono::steady_clock::now() < deadline);
@@ -393,8 +393,8 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    WarmUpEspSnapshot();
-    esp::StartDataWorker();
+    WarmUpVisualsSnapshot();
+    visuals::StartDataWorker();
     webradar::Initialize();
     console.PrintInfoOk("The system is initialized and ready to work");
 
@@ -405,7 +405,7 @@ int main(int argc, char* argv[])
         ~ShutdownGuard()
         {
             webradar::Shutdown();
-            esp::StopDataWorker();
+            visuals::StopDataWorker();
             overlay::Destroy();
         }
     } shutdownGuard;

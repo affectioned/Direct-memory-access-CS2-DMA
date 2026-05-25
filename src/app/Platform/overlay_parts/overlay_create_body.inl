@@ -1,4 +1,4 @@
-    const HINSTANCE hInst = GetModuleHandleW(nullptr);
+﻿    const HINSTANCE hInst = GetModuleHandleW(nullptr);
     const HICON hIcon = LoadIconW(hInst, L"IDI_APPICON");
 
     WNDCLASSEXW wc = {};
@@ -148,9 +148,9 @@
         g::fontDefault = io.Fonts->AddFontFromFileTTF(segoeRegularPath.c_str(), baseFontSize, nullptr, glyphRanges);
 
     if (std::filesystem::exists(comicBoldPath))
-        g::fontSegoeBold = io.Fonts->AddFontFromFileTTF(comicBoldPath.c_str(), g::espNameFontSize, nullptr, glyphRanges);
+        g::fontSegoeBold = io.Fonts->AddFontFromFileTTF(comicBoldPath.c_str(), g::visualsNameFontSize, nullptr, glyphRanges);
     else if (std::filesystem::exists(segoeBoldPath))
-        g::fontSegoeBold = io.Fonts->AddFontFromFileTTF(segoeBoldPath.c_str(), g::espNameFontSize, nullptr, glyphRanges);
+        g::fontSegoeBold = io.Fonts->AddFontFromFileTTF(segoeBoldPath.c_str(), g::visualsNameFontSize, nullptr, glyphRanges);
     if (std::filesystem::exists(comicRegularPath)) {
         ImFontConfig comicCfg = {};
         comicCfg.OversampleH = 2;
@@ -178,7 +178,7 @@
         &weaponCfg,
         weaponRanges);
 
-    LoadEspUiIconTextures();
+    LoadVisualsUiIconTextures();
 
     ui::ApplyStyle();
 

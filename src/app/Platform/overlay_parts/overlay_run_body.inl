@@ -1,4 +1,4 @@
-    using Clock = std::chrono::steady_clock;
+﻿    using Clock = std::chrono::steady_clock;
     auto lastFrameTime = Clock::now();
 
     MSG msg = {};
@@ -46,9 +46,9 @@
         ImGui::NewFrame();
 
         webradar::ApplySettingsFromGlobals();
-        webradar::CaptureFromEsp();
+        webradar::CaptureFromVisuals();
 
-        esp::Draw();
+        visuals::Draw();
 
         ui::RenderMenu();
 

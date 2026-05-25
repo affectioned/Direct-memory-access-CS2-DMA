@@ -1,4 +1,4 @@
-#include "app/Config/config.h"
+﻿#include "app/Config/config.h"
 #include "app/Core/globals.h"
 #include "app/Config/project_paths.h"
 #include "app/Config/user_state.h"
@@ -135,7 +135,7 @@ namespace {
     };
 
     struct ConfigSnapshot {
-        app::state::EspSettings esp = {};
+        app::state::VisualsSettings visuals = {};
         app::state::RadarSettings radar = {};
         app::state::WebRadarSettings webRadar = {};
         app::state::UiSettings ui = {};
@@ -145,7 +145,7 @@ namespace {
     ConfigSnapshot CaptureCurrentConfig()
     {
         return ConfigSnapshot {
-            g::espSettings,
+            g::visualsSettings,
             g::radarSettings,
             g::webRadarSettings,
             g::uiSettings,
@@ -155,7 +155,7 @@ namespace {
 
     void ApplyConfig(const ConfigSnapshot& snapshot)
     {
-        g::espSettings = snapshot.esp;
+        g::visualsSettings = snapshot.visuals;
         g::radarSettings = snapshot.radar;
         g::webRadarSettings = snapshot.webRadar;
         g::uiSettings = snapshot.ui;
@@ -362,7 +362,7 @@ namespace {
         if (it == section->end() || !it->is_array())
             return;
 
-        mask = app::state::CreateDefaultItemEspMask();
+        mask = app::state::CreateDefaultItemVisualsMask();
         for (const auto& value : *it) {
             if (!value.is_number_unsigned() && !value.is_number_integer())
                 continue;
@@ -441,7 +441,7 @@ namespace {
         if (raw == nullptr)
             return;
 
-        mask = app::state::CreateDefaultItemEspMask();
+        mask = app::state::CreateDefaultItemVisualsMask();
         const std::string_view value = *raw;
         size_t start = 0;
         while (start < value.size()) {
@@ -468,8 +468,8 @@ namespace {
             g::radarSize = defaults.radar.size;
         if (g::radarDotSize < 2.0f || g::radarDotSize > 8.0f)
             g::radarDotSize = defaults.radar.dotSize;
-        if (g::espOffscreenSize < 6.0f || g::espOffscreenSize > 36.0f)
-            g::espOffscreenSize = defaults.esp.offscreenSize;
+        if (g::visualsOffscreenSize < 6.0f || g::visualsOffscreenSize > 36.0f)
+            g::visualsOffscreenSize = defaults.visuals.offscreenSize;
         if (g::radarWorldRotationDeg < -180.0f || g::radarWorldRotationDeg > 180.0f)
             g::radarWorldRotationDeg = defaults.radar.worldRotationDeg;
         if (g::radarWorldScale < 0.50f || g::radarWorldScale > 1.50f)
@@ -492,13 +492,13 @@ namespace {
                 y = defaultY;
         };
         sanitizeOverlayPos(g::radarSpectatorListX, g::radarSpectatorListY, defaults.radar.spectatorListX, defaults.radar.spectatorListY);
-        sanitizeOverlayPos(g::espBombTimerX, g::espBombTimerY, defaults.esp.bombTimerX, defaults.esp.bombTimerY);
+        sanitizeOverlayPos(g::visualsBombTimerX, g::visualsBombTimerY, defaults.visuals.bombTimerX, defaults.visuals.bombTimerY);
         if (g::menuToggleKey < 0x08 || g::menuToggleKey > 0xFE || g::menuToggleKey == kVkEnd || g::menuToggleKey == kVkInsert)
             g::menuToggleKey = defaults.ui.menuToggleKey;
-        g::espItemEnabledMask.set(0, false);
+        g::visualsItemEnabledMask.set(0, false);
         for (uint16_t id = 1; id < 1200; ++id) {
             if (app::state::IsKnifeItemId(id))
-                g::espItemEnabledMask.set(id, false);
+                g::visualsItemEnabledMask.set(id, false);
         }
         g::webRadarIntervalMs = 4;
     }
@@ -510,81 +510,81 @@ namespace {
 
     void ApplyLoadedConfig(const IniDocument& ini)
     {
-        LoadBool(ini, "ESP", "Enabled", g::espEnabled);
-        LoadBool(ini, "ESP", "Box", g::espBox);
-        LoadBool(ini, "ESP", "Health", g::espHealth);
-        LoadBool(ini, "ESP", "HealthText", g::espHealthText);
-        LoadBool(ini, "ESP", "Armor", g::espArmor);
-        LoadBool(ini, "ESP", "ArmorText", g::espArmorText);
-        LoadBool(ini, "ESP", "Name", g::espName);
-        LoadFloat(ini, "ESP", "NameFontSize", g::espNameFontSize);
-        LoadBool(ini, "ESP", "Weapon", g::espWeapon);
-        LoadBool(ini, "ESP", "WeaponText", g::espWeaponText);
-        LoadFloat(ini, "ESP", "WeaponTextSize", g::espWeaponTextSize);
-        LoadColor(ini, "ESP", "WeaponTextColor", g::espWeaponTextColor);
-        LoadBool(ini, "ESP", "WeaponIcon", g::espWeaponIcon);
-        LoadBool(ini, "ESP", "WeaponIconNoKnife", g::espWeaponIconNoKnife);
-        LoadFloat(ini, "ESP", "WeaponIconSize", g::espWeaponIconSize);
-        LoadColor(ini, "ESP", "WeaponIconColor", g::espWeaponIconColor);
-        LoadBool(ini, "ESP", "WeaponAmmo", g::espWeaponAmmo);
-        LoadFloat(ini, "ESP", "WeaponAmmoSize", g::espWeaponAmmoSize);
-        LoadColor(ini, "ESP", "WeaponAmmoColor", g::espWeaponAmmoColor);
-        LoadBool(ini, "ESP", "Distance", g::espDistance);
-        LoadFloat(ini, "ESP", "DistanceSize", g::espDistanceSize);
-        LoadBool(ini, "ESP", "Skeleton", g::espSkeleton);
-        LoadBool(ini, "ESP", "SkeletonDots", g::espSkeletonDots);
-        LoadBool(ini, "ESP", "Snaplines", g::espSnaplines);
-        LoadBool(ini, "ESP", "SnapFromTop", g::espSnaplineFromTop);
-        LoadBool(ini, "ESP", "VisibilityColoring", g::espVisibilityColoring);
-        LoadBool(ini, "ESP", "VisibleOnly", g::espVisibleOnly);
-        LoadBool(ini, "ESP", "ShowTeammates", g::espShowTeammates);
-        LoadBool(ini, "ESP", "OffscreenArrows", g::espOffscreenArrows);
-        LoadBool(ini, "ESP", "Sound", g::espSound);
-        LoadBool(ini, "ESP", "Flags", g::espFlags);
-        LoadBool(ini, "ESP", "Item", g::espItem);
-        LoadBool(ini, "ESP", "FlagBlind", g::espFlagBlind);
-        LoadColor(ini, "ESP", "FlagBlindColor", g::espFlagBlindColor);
-        LoadFloat(ini, "ESP", "FlagBlindSize", g::espFlagBlindSize);
-        LoadBool(ini, "ESP", "FlagScoped", g::espFlagScoped);
-        LoadColor(ini, "ESP", "FlagScopedColor", g::espFlagScopedColor);
-        LoadFloat(ini, "ESP", "FlagScopedSize", g::espFlagScopedSize);
-        LoadBool(ini, "ESP", "FlagDefusing", g::espFlagDefusing);
-        LoadColor(ini, "ESP", "FlagDefusingColor", g::espFlagDefusingColor);
-        LoadFloat(ini, "ESP", "FlagDefusingSize", g::espFlagDefusingSize);
-        LoadBool(ini, "ESP", "FlagKit", g::espFlagKit);
-        LoadColor(ini, "ESP", "FlagKitColor", g::espFlagKitColor);
-        LoadFloat(ini, "ESP", "FlagKitSize", g::espFlagKitSize);
-        LoadBool(ini, "ESP", "FlagMoney", g::espFlagMoney);
-        LoadColor(ini, "ESP", "FlagMoneyColor", g::espFlagMoneyColor);
-        LoadFloat(ini, "ESP", "FlagMoneySize", g::espFlagMoneySize);
-        LoadBool(ini, "ESP", "World", g::espWorld);
-        LoadBool(ini, "ESP", "WorldProjectiles", g::espWorldProjectiles);
-        LoadBool(ini, "ESP", "WorldSmokeTimer", g::espWorldSmokeTimer);
-        LoadBool(ini, "ESP", "WorldInfernoTimer", g::espWorldInfernoTimer);
-        LoadBool(ini, "ESP", "WorldDecoyTimer", g::espWorldDecoyTimer);
-        LoadBool(ini, "ESP", "WorldExplosiveTimer", g::espWorldExplosiveTimer);
-        LoadBool(ini, "ESP", "BombInfo", g::espBombInfo);
-        LoadBool(ini, "ESP", "BombText", g::espBombText);
-        LoadBool(ini, "ESP", "BombTime", g::espBombTime);
-        LoadFloat(ini, "ESP", "BombTextSize", g::espBombTextSize);
-        LoadFloat(ini, "ESP", "BombTimerX", g::espBombTimerX);
-        LoadFloat(ini, "ESP", "BombTimerY", g::espBombTimerY);
-        LoadDisabledItemIds(ini, "ESP", "ItemHiddenIds", g::espItemEnabledMask);
-        LoadFloat(ini, "ESP", "OffscreenSize", g::espOffscreenSize);
-        LoadColor(ini, "ESP", "BoxColor", g::espBoxColor);
-        LoadColor(ini, "ESP", "HealthColor", g::espHealthColor);
-        LoadColor(ini, "ESP", "VisibleColor", g::espVisibleColor);
-        LoadColor(ini, "ESP", "HiddenColor", g::espHiddenColor);
-        LoadColor(ini, "ESP", "ArmorColor", g::espArmorColor);
-        LoadColor(ini, "ESP", "NameColor", g::espNameColor);
-        LoadColor(ini, "ESP", "DistanceColor", g::espDistanceColor);
-        LoadColor(ini, "ESP", "SkeletonColor", g::espSkeletonColor);
-        LoadColor(ini, "ESP", "SnaplineColor", g::espSnaplineColor);
-        LoadColor(ini, "ESP", "OffscreenColor", g::espOffscreenColor);
-        LoadColor(ini, "ESP", "FlagColor", g::espFlagColor);
-        LoadColor(ini, "ESP", "WorldColor", g::espWorldColor);
-        LoadColor(ini, "ESP", "BombColor", g::espBombColor);
-        LoadColor(ini, "ESP", "SoundColor", g::espSoundColor);
+        LoadBool(ini, "Visuals", "Enabled", g::visualsEnabled);
+        LoadBool(ini, "Visuals", "Box", g::visualsBox);
+        LoadBool(ini, "Visuals", "Health", g::visualsHealth);
+        LoadBool(ini, "Visuals", "HealthText", g::visualsHealthText);
+        LoadBool(ini, "Visuals", "Armor", g::visualsArmor);
+        LoadBool(ini, "Visuals", "ArmorText", g::visualsArmorText);
+        LoadBool(ini, "Visuals", "Name", g::visualsName);
+        LoadFloat(ini, "Visuals", "NameFontSize", g::visualsNameFontSize);
+        LoadBool(ini, "Visuals", "Weapon", g::visualsWeapon);
+        LoadBool(ini, "Visuals", "WeaponText", g::visualsWeaponText);
+        LoadFloat(ini, "Visuals", "WeaponTextSize", g::visualsWeaponTextSize);
+        LoadColor(ini, "Visuals", "WeaponTextColor", g::visualsWeaponTextColor);
+        LoadBool(ini, "Visuals", "WeaponIcon", g::visualsWeaponIcon);
+        LoadBool(ini, "Visuals", "WeaponIconNoKnife", g::visualsWeaponIconNoKnife);
+        LoadFloat(ini, "Visuals", "WeaponIconSize", g::visualsWeaponIconSize);
+        LoadColor(ini, "Visuals", "WeaponIconColor", g::visualsWeaponIconColor);
+        LoadBool(ini, "Visuals", "WeaponAmmo", g::visualsWeaponAmmo);
+        LoadFloat(ini, "Visuals", "WeaponAmmoSize", g::visualsWeaponAmmoSize);
+        LoadColor(ini, "Visuals", "WeaponAmmoColor", g::visualsWeaponAmmoColor);
+        LoadBool(ini, "Visuals", "Distance", g::visualsDistance);
+        LoadFloat(ini, "Visuals", "DistanceSize", g::visualsDistanceSize);
+        LoadBool(ini, "Visuals", "Skeleton", g::visualsSkeleton);
+        LoadBool(ini, "Visuals", "SkeletonDots", g::visualsSkeletonDots);
+        LoadBool(ini, "Visuals", "Snaplines", g::visualsSnaplines);
+        LoadBool(ini, "Visuals", "SnapFromTop", g::visualsSnaplineFromTop);
+        LoadBool(ini, "Visuals", "VisibilityColoring", g::visualsVisibilityColoring);
+        LoadBool(ini, "Visuals", "VisibleOnly", g::visualsVisibleOnly);
+        LoadBool(ini, "Visuals", "ShowTeammates", g::visualsShowTeammates);
+        LoadBool(ini, "Visuals", "OffscreenArrows", g::visualsOffscreenArrows);
+        LoadBool(ini, "Visuals", "Sound", g::visualsSound);
+        LoadBool(ini, "Visuals", "Flags", g::visualsFlags);
+        LoadBool(ini, "Visuals", "Item", g::visualsItem);
+        LoadBool(ini, "Visuals", "FlagBlind", g::visualsFlagBlind);
+        LoadColor(ini, "Visuals", "FlagBlindColor", g::visualsFlagBlindColor);
+        LoadFloat(ini, "Visuals", "FlagBlindSize", g::visualsFlagBlindSize);
+        LoadBool(ini, "Visuals", "FlagScoped", g::visualsFlagScoped);
+        LoadColor(ini, "Visuals", "FlagScopedColor", g::visualsFlagScopedColor);
+        LoadFloat(ini, "Visuals", "FlagScopedSize", g::visualsFlagScopedSize);
+        LoadBool(ini, "Visuals", "FlagDefusing", g::visualsFlagDefusing);
+        LoadColor(ini, "Visuals", "FlagDefusingColor", g::visualsFlagDefusingColor);
+        LoadFloat(ini, "Visuals", "FlagDefusingSize", g::visualsFlagDefusingSize);
+        LoadBool(ini, "Visuals", "FlagKit", g::visualsFlagKit);
+        LoadColor(ini, "Visuals", "FlagKitColor", g::visualsFlagKitColor);
+        LoadFloat(ini, "Visuals", "FlagKitSize", g::visualsFlagKitSize);
+        LoadBool(ini, "Visuals", "FlagMoney", g::visualsFlagMoney);
+        LoadColor(ini, "Visuals", "FlagMoneyColor", g::visualsFlagMoneyColor);
+        LoadFloat(ini, "Visuals", "FlagMoneySize", g::visualsFlagMoneySize);
+        LoadBool(ini, "Visuals", "World", g::visualsWorld);
+        LoadBool(ini, "Visuals", "WorldProjectiles", g::visualsWorldProjectiles);
+        LoadBool(ini, "Visuals", "WorldSmokeTimer", g::visualsWorldSmokeTimer);
+        LoadBool(ini, "Visuals", "WorldInfernoTimer", g::visualsWorldInfernoTimer);
+        LoadBool(ini, "Visuals", "WorldDecoyTimer", g::visualsWorldDecoyTimer);
+        LoadBool(ini, "Visuals", "WorldExplosiveTimer", g::visualsWorldExplosiveTimer);
+        LoadBool(ini, "Visuals", "BombInfo", g::visualsBombInfo);
+        LoadBool(ini, "Visuals", "BombText", g::visualsBombText);
+        LoadBool(ini, "Visuals", "BombTime", g::visualsBombTime);
+        LoadFloat(ini, "Visuals", "BombTextSize", g::visualsBombTextSize);
+        LoadFloat(ini, "Visuals", "BombTimerX", g::visualsBombTimerX);
+        LoadFloat(ini, "Visuals", "BombTimerY", g::visualsBombTimerY);
+        LoadDisabledItemIds(ini, "Visuals", "ItemHiddenIds", g::visualsItemEnabledMask);
+        LoadFloat(ini, "Visuals", "OffscreenSize", g::visualsOffscreenSize);
+        LoadColor(ini, "Visuals", "BoxColor", g::visualsBoxColor);
+        LoadColor(ini, "Visuals", "HealthColor", g::visualsHealthColor);
+        LoadColor(ini, "Visuals", "VisibleColor", g::visualsVisibleColor);
+        LoadColor(ini, "Visuals", "HiddenColor", g::visualsHiddenColor);
+        LoadColor(ini, "Visuals", "ArmorColor", g::visualsArmorColor);
+        LoadColor(ini, "Visuals", "NameColor", g::visualsNameColor);
+        LoadColor(ini, "Visuals", "DistanceColor", g::visualsDistanceColor);
+        LoadColor(ini, "Visuals", "SkeletonColor", g::visualsSkeletonColor);
+        LoadColor(ini, "Visuals", "SnaplineColor", g::visualsSnaplineColor);
+        LoadColor(ini, "Visuals", "OffscreenColor", g::visualsOffscreenColor);
+        LoadColor(ini, "Visuals", "FlagColor", g::visualsFlagColor);
+        LoadColor(ini, "Visuals", "WorldColor", g::visualsWorldColor);
+        LoadColor(ini, "Visuals", "BombColor", g::visualsBombColor);
+        LoadColor(ini, "Visuals", "SoundColor", g::visualsSoundColor);
 
         LoadBool(ini, "Radar", "Enabled", g::radarEnabled);
         LoadInt(ini, "Radar", "Mode", g::radarMode);
@@ -615,7 +615,7 @@ namespace {
         LoadBool(ini, "Screen", "VSync", g::vsyncEnabled);
         LoadInt(ini, "Screen", "FPSLimit", g::fpsLimit);
 
-        LoadBool(ini, "UI", "EspPreviewOpen", g::espPreviewOpen);
+        LoadBool(ini, "UI", "VisualsPreviewOpen", g::visualsPreviewOpen);
         LoadBool(ini, "UI", "RadarCalibrationOpen", g::radarCalibrationOpen);
         LoadBool(ini, "UI", "WebRadarQrOpen", g::webRadarQrOpen);
         LoadBool(ini, "UI", "WebRadarDebugOpen", g::webRadarDebugOpen);

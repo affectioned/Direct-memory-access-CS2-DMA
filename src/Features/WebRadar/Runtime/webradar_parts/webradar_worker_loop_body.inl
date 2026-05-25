@@ -1,4 +1,4 @@
-    std::string stickyMapName;
+﻿    std::string stickyMapName;
     uint64_t stickyMapStampMs = 0;
     uint64_t frameSeq = 0;
     int nextWaitMs = 16;
@@ -8,7 +8,7 @@
 
     while (running_.load(std::memory_order_relaxed)) {
         SettingsSnapshot settings = {};
-        esp::WebRadarSnapshot snapshot = {};
+        visuals::WebRadarSnapshot snapshot = {};
         bool hasSnapshot = false;
         uint64_t snapshotVersion = 0;
         uint64_t settingsVersion = 0;
