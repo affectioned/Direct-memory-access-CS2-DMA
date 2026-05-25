@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "Features/Visuals/visuals.h"
+#include "Features/ESP/esp.h"
 
 #include <atomic>
 #include <cstddef>
@@ -45,7 +45,7 @@ public:
     void Stop();
 
     void Configure(bool enabled, int intervalMs, uint16_t listenPort, const std::string& mapOverride);
-    void UpdateSnapshot(const visuals::WebRadarSnapshot& snapshot);
+    void UpdateSnapshot(const esp::WebRadarSnapshot& snapshot);
 
     RuntimeStats GetStats() const;
     bool HasActiveConsumers() const;
@@ -75,7 +75,7 @@ private:
     static std::string Trim(const std::string& text);
     static uint64_t UnixNowMs();
     static std::string BuildPlayerSteamId(int slot);
-    static std::string ResolveMapName(const visuals::WebRadarSnapshot& snapshot);
+    static std::string ResolveMapName(const esp::WebRadarSnapshot& snapshot);
     static std::string NormalizeMapName(const std::string& rawName);
 
 private:
@@ -99,7 +99,7 @@ private:
 
     SettingsSnapshot settings_;
     uint64_t settingsVersion_ = 1;
-    visuals::WebRadarSnapshot latestSnapshot_ = {};
+    esp::WebRadarSnapshot latestSnapshot_ = {};
     bool hasSnapshot_ = false;
     uint64_t snapshotVersion_ = 0;
     std::string latestPayloadJson_;

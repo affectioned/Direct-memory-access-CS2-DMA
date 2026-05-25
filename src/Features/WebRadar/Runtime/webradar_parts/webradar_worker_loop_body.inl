@@ -8,7 +8,7 @@
 
     while (running_.load(std::memory_order_relaxed)) {
         SettingsSnapshot settings = {};
-        visuals::WebRadarSnapshot snapshot = {};
+        esp::WebRadarSnapshot snapshot = {};
         bool hasSnapshot = false;
         uint64_t snapshotVersion = 0;
         uint64_t settingsVersion = 0;
@@ -71,7 +71,7 @@
                 latestPayloadJson_ = payloadJson;
                 ++latestPayloadVersion_;
                 stats_.statusText = stats_.serverListening
-                    ? (settings.enabled ? "Server listening, waiting for Visuals snapshot" : "Server listening, WEBRadar disabled")
+                    ? (settings.enabled ? "Server listening, waiting for ESP snapshot" : "Server listening, WEBRadar disabled")
                     : (settings.enabled ? "Waiting for HTTP listener" : "WEBRadar disabled");
             }
             cv_.notify_all();

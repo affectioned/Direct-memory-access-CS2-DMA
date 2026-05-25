@@ -19,7 +19,7 @@ namespace app::state {
         return id >= 500 && id <= 526;
     }
 
-    inline std::bitset<1200> CreateDefaultItemVisualsMask()
+    inline std::bitset<1200> CreateDefaultItemEspMask()
     {
         std::bitset<1200> mask;
         mask.set();
@@ -45,7 +45,7 @@ namespace app::state {
         bool menuOpen = true;
     };
 
-    struct VisualsSettings {
+    struct EspSettings {
         bool enabled = true;
         bool box = true;
         bool health = true;
@@ -104,7 +104,7 @@ namespace app::state {
         bool soundReloads = true;
         float soundRange = 1500.0f;
         float soundDuration = 1.5f;
-        std::bitset<1200> itemEnabledMask = CreateDefaultItemVisualsMask();
+        std::bitset<1200> itemEnabledMask = CreateDefaultItemEspMask();
         float boxColor[4] = { 1.0f, 0.20f, 0.20f, 1.0f };
         float healthColor[4] = { 0.25f, 0.95f, 0.35f, 1.0f };
         float visibleColor[4] = { 1.0f, 0.20f, 0.20f, 1.0f };
@@ -175,9 +175,9 @@ namespace app::state {
         ImFont* fontWeaponIcons = nullptr;
     };
 
-    struct VisualsUiIconState {
-        uintptr_t enableVisuals = 0;
-        uintptr_t visualsPreview = 0;
+    struct EspUiIconState {
+        uintptr_t enableEsp = 0;
+        uintptr_t espPreview = 0;
         uintptr_t cornerBox = 0;
         uintptr_t healthBar = 0;
         uintptr_t armorBar = 0;
@@ -193,12 +193,12 @@ namespace app::state {
     struct AppState {
         DisplaySettings display = {};
         RuntimeState runtime = {};
-        VisualsSettings visuals = {};
+        EspSettings esp = {};
         RadarSettings radar = {};
         WebRadarSettings webRadar = {};
         UiSettings ui = {};
         FontState fonts = {};
-        VisualsUiIconState visualsUiIcons = {};
+        EspUiIconState espUiIcons = {};
     };
 
     inline AppState globalState = {};

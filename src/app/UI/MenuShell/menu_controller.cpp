@@ -5,10 +5,10 @@
 #include "app/Core/globals.h"
 #include "app/UI/MenuShell/menu_utils.h"
 #include "Features/Settings/UI/settings_tab.h"
-#include "Features/Visuals/UI/visuals_tab.h"
+#include "Features/ESP/UI/esp_tab.h"
 #include "Features/Radar/UI/radar_tab.h"
 #include "Features/WebRadar/UI/webradar_tab.h"
-#include "Features/Visuals/visuals.h"
+#include "Features/ESP/esp.h"
 
 #include <Windows.h>
 
@@ -19,24 +19,24 @@
 
 namespace
 {
-    const char* GetStatusText(const visuals::DmaHealthStats& stats)
+    const char* GetStatusText(const esp::DmaHealthStats& stats)
     {
         if (stats.recovering)
             return "Recovering...";
         switch (stats.gameStatus) {
-        case visuals::GameStatus::Ok:       return "OK";
-        case visuals::GameStatus::WaitCs2:  return "Wait cs2.exe";
+        case esp::GameStatus::Ok:       return "OK";
+        case esp::GameStatus::WaitCs2:  return "Wait cs2.exe";
         default:                        return "Unknown";
         }
     }
 
-    ImVec4 GetStatusColor(const visuals::DmaHealthStats& stats)
+    ImVec4 GetStatusColor(const esp::DmaHealthStats& stats)
     {
         if (stats.recovering)
             return ImVec4(0.88f, 0.72f, 0.38f, 1.0f);
         switch (stats.gameStatus) {
-        case visuals::GameStatus::Ok:       return ImVec4(0.52f, 0.82f, 0.56f, 1.0f);
-        case visuals::GameStatus::WaitCs2:  return ImVec4(0.88f, 0.38f, 0.38f, 1.0f);
+        case esp::GameStatus::Ok:       return ImVec4(0.52f, 0.82f, 0.56f, 1.0f);
+        case esp::GameStatus::WaitCs2:  return ImVec4(0.88f, 0.38f, 0.38f, 1.0f);
         default:                        return ImVec4(0.88f, 0.38f, 0.38f, 1.0f);
         }
     }
@@ -97,7 +97,7 @@ namespace
 
 ui::MenuController::MenuController()
 {
-    tabs_.push_back(std::make_unique<ui::tabs::VisualsTab>());
+    tabs_.push_back(std::make_unique<ui::tabs::EspTab>());
     tabs_.push_back(std::make_unique<ui::tabs::RadarTab>());
     tabs_.push_back(std::make_unique<ui::tabs::WebRadarTab>());
     tabs_.push_back(std::make_unique<ui::tabs::SettingsTab>());
@@ -148,7 +148,7 @@ void ui::MenuController::Render()
     const float contentIndent = 8.0f;
     ImGui::Indent(contentIndent);
 
-    const visuals::DmaHealthStats dmaStats = visuals::GetDmaHealthStats();
+    const esp::DmaHealthStats dmaStats = esp::GetDmaHealthStats();
     ImGui::TextUnformatted("KevqDMA");
     ImGui::SameLine(0, 4);
     ImGui::TextDisabled("| Status:");

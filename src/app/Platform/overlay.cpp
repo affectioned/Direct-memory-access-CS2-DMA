@@ -2,11 +2,11 @@
 #include "app/Core/build_info.h"
 #include "app/Core/globals.h"
 #include "app/Config/project_paths.h"
-#include "Features/Visuals/visuals.h"
+#include "Features/ESP/esp.h"
 #include "app/UI/MenuShell/ui_style.h"
 #include "Features/WebRadar/webradar.h"
 #include "fonts/weapons.hpp"
-#include "icons/visuals_ui_icons.hpp"
+#include "icons/esp_ui_icons.hpp"
 #include <DMALibrary/Memory/Memory.h>
 
 #include <Windows.h>
@@ -49,9 +49,9 @@ static std::atomic<uint64_t>   s_overlayDrawUs = 0;
 static std::atomic<uint64_t>   s_overlayPresentUs = 0;
 static std::atomic<uint64_t>   s_overlayPacingWaitUs = 0;
 
-enum class VisualsUiIconSlot : size_t {
-    EnableVisuals,
-    VisualsPreview,
+enum class EspUiIconSlot : size_t {
+    EnableEsp,
+    EspPreview,
     CornerBox,
     HealthBar,
     ArmorBar,
@@ -60,12 +60,12 @@ enum class VisualsUiIconSlot : size_t {
     Skeleton,
     SnapLines,
     PlayerFlags,
-    WorldVisuals,
-    BombVisuals,
+    WorldEsp,
+    BombEsp,
     Count
 };
 
-static std::array<ComPtr<ID3D11ShaderResourceView>, static_cast<size_t>(VisualsUiIconSlot::Count)> s_visualsUiIconViews;
+static std::array<ComPtr<ID3D11ShaderResourceView>, static_cast<size_t>(EspUiIconSlot::Count)> s_espUiIconViews;
 
 static void RecreateRenderTarget(UINT width, UINT height)
 {
@@ -402,20 +402,20 @@ static bool CheckTearingSupport()
     return SUCCEEDED(hr) && allowTearing;
 }
 
-static void ClearVisualsUiIconTextures()
+static void ClearEspUiIconTextures()
 {
-    g::visualsUiIcons = {};
-    for (auto& view : s_visualsUiIconViews)
+    g::espUiIcons = {};
+    for (auto& view : s_espUiIconViews)
         view.Reset();
 }
 
-static bool CreateVisualsUiIconTexture(const uint8_t* rleData, size_t rleBytes, ComPtr<ID3D11ShaderResourceView>& outView)
+static bool CreateEspUiIconTexture(const uint8_t* rleData, size_t rleBytes, ComPtr<ID3D11ShaderResourceView>& outView)
 {
     if (!s_device || !rleData || (rleBytes % 2u) != 0u)
         return false;
 
-    constexpr int iconSize = resources::icons::visuals_ui::kIconSize;
-    constexpr size_t iconPixels = resources::icons::visuals_ui::kIconPixels;
+    constexpr int iconSize = resources::icons::esp_ui::kIconSize;
+    constexpr size_t iconPixels = resources::icons::esp_ui::kIconPixels;
     std::array<uint32_t, iconPixels> pixels = {};
     size_t pixelIndex = 0;
 
@@ -453,29 +453,29 @@ static bool CreateVisualsUiIconTexture(const uint8_t* rleData, size_t rleBytes, 
     return SUCCEEDED(hr) && outView;
 }
 
-static void LoadVisualsUiIconTextures()
+static void LoadEspUiIconTextures()
 {
-    ClearVisualsUiIconTextures();
+    ClearEspUiIconTextures();
 
-    const auto loadIcon = [](VisualsUiIconSlot slot, const uint8_t* data, size_t bytes, uintptr_t& target) {
-        auto& view = s_visualsUiIconViews[static_cast<size_t>(slot)];
-        if (CreateVisualsUiIconTexture(data, bytes, view))
+    const auto loadIcon = [](EspUiIconSlot slot, const uint8_t* data, size_t bytes, uintptr_t& target) {
+        auto& view = s_espUiIconViews[static_cast<size_t>(slot)];
+        if (CreateEspUiIconTexture(data, bytes, view))
             target = reinterpret_cast<uintptr_t>(view.Get());
     };
 
-    using namespace resources::icons::visuals_ui;
-    loadIcon(VisualsUiIconSlot::EnableVisuals, enable_visuals_rle, sizeof(enable_visuals_rle), g::visualsUiIcons.enableVisuals);
-    loadIcon(VisualsUiIconSlot::VisualsPreview, visuals_preview_rle, sizeof(visuals_preview_rle), g::visualsUiIcons.visualsPreview);
-    loadIcon(VisualsUiIconSlot::CornerBox, corner_box_rle, sizeof(corner_box_rle), g::visualsUiIcons.cornerBox);
-    loadIcon(VisualsUiIconSlot::HealthBar, health_bar_rle, sizeof(health_bar_rle), g::visualsUiIcons.healthBar);
-    loadIcon(VisualsUiIconSlot::ArmorBar, armor_bar_rle, sizeof(armor_bar_rle), g::visualsUiIcons.armorBar);
-    loadIcon(VisualsUiIconSlot::VisibilityColors, visibility_colors_rle, sizeof(visibility_colors_rle), g::visualsUiIcons.visibilityColors);
-    loadIcon(VisualsUiIconSlot::WeaponLabel, weapon_label_rle, sizeof(weapon_label_rle), g::visualsUiIcons.weaponLabel);
-    loadIcon(VisualsUiIconSlot::Skeleton, skeleton_rle, sizeof(skeleton_rle), g::visualsUiIcons.skeleton);
-    loadIcon(VisualsUiIconSlot::SnapLines, snap_lines_rle, sizeof(snap_lines_rle), g::visualsUiIcons.snapLines);
-    loadIcon(VisualsUiIconSlot::PlayerFlags, player_flags_rle, sizeof(player_flags_rle), g::visualsUiIcons.playerFlags);
-    loadIcon(VisualsUiIconSlot::WorldVisuals, world_visuals_rle, sizeof(world_visuals_rle), g::visualsUiIcons.worldEsp);
-    loadIcon(VisualsUiIconSlot::BombVisuals, bomb_visuals_rle, sizeof(bomb_visuals_rle), g::visualsUiIcons.bombEsp);
+    using namespace resources::icons::esp_ui;
+    loadIcon(EspUiIconSlot::EnableEsp, enable_esp_rle, sizeof(enable_esp_rle), g::espUiIcons.enableEsp);
+    loadIcon(EspUiIconSlot::EspPreview, esp_preview_rle, sizeof(esp_preview_rle), g::espUiIcons.espPreview);
+    loadIcon(EspUiIconSlot::CornerBox, corner_box_rle, sizeof(corner_box_rle), g::espUiIcons.cornerBox);
+    loadIcon(EspUiIconSlot::HealthBar, health_bar_rle, sizeof(health_bar_rle), g::espUiIcons.healthBar);
+    loadIcon(EspUiIconSlot::ArmorBar, armor_bar_rle, sizeof(armor_bar_rle), g::espUiIcons.armorBar);
+    loadIcon(EspUiIconSlot::VisibilityColors, visibility_colors_rle, sizeof(visibility_colors_rle), g::espUiIcons.visibilityColors);
+    loadIcon(EspUiIconSlot::WeaponLabel, weapon_label_rle, sizeof(weapon_label_rle), g::espUiIcons.weaponLabel);
+    loadIcon(EspUiIconSlot::Skeleton, skeleton_rle, sizeof(skeleton_rle), g::espUiIcons.skeleton);
+    loadIcon(EspUiIconSlot::SnapLines, snap_lines_rle, sizeof(snap_lines_rle), g::espUiIcons.snapLines);
+    loadIcon(EspUiIconSlot::PlayerFlags, player_flags_rle, sizeof(player_flags_rle), g::espUiIcons.playerFlags);
+    loadIcon(EspUiIconSlot::WorldEsp, world_esp_rle, sizeof(world_esp_rle), g::espUiIcons.worldEsp);
+    loadIcon(EspUiIconSlot::BombEsp, bomb_esp_rle, sizeof(bomb_esp_rle), g::espUiIcons.bombEsp);
 }
 
 static LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -525,7 +525,7 @@ void overlay::Destroy()
         s_frameLatencyWaitableObject = nullptr;
     }
 
-    ClearVisualsUiIconTextures();
+    ClearEspUiIconTextures();
 
     s_rtv.Reset();
     s_swapChain.Reset();

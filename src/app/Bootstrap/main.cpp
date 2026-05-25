@@ -8,7 +8,7 @@
 #include "app/Core/build_info.h"
 #include "app/Core/globals.h"
 #include "app/Platform/overlay.h"
-#include "Features/Visuals/visuals.h"
+#include "Features/ESP/esp.h"
 #include "Features/WebRadar/webradar.h"
 #include "Game/Offsets/runtime_offsets.h"
 
@@ -120,7 +120,7 @@ namespace
 
         const auto deadline = std::chrono::steady_clock::now() + kWarmupBudget;
         do {
-            if (visuals::UpdateData())
+            if (esp::UpdateData())
                 return;
             std::this_thread::sleep_for(kWarmupRetryDelay);
         } while (std::chrono::steady_clock::now() < deadline);
@@ -394,7 +394,7 @@ int main(int argc, char* argv[])
     }
 
     WarmUpEspSnapshot();
-    visuals::StartDataWorker();
+    esp::StartDataWorker();
     webradar::Initialize();
     console.PrintInfoOk("The system is initialized and ready to work");
 
@@ -405,7 +405,7 @@ int main(int argc, char* argv[])
         ~ShutdownGuard()
         {
             webradar::Shutdown();
-            visuals::StopDataWorker();
+            esp::StopDataWorker();
             overlay::Destroy();
         }
     } shutdownGuard;
