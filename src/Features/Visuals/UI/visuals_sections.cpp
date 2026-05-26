@@ -834,6 +834,14 @@ void ui::tabs::visuals_sections::RenderOptionsGrid()
                 ToggleSetting("snd_foot", "Footsteps", &g::visualsSoundFootsteps);
                 ToggleSetting("snd_shot", "Shots Fired", &g::visualsSoundShots);
                 ToggleSetting("snd_rel", "Reloads", &g::visualsSoundReloads);
+                ImGui::Separator();
+                if (ImGui::Button("Reset Defaults", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
+                    g::visualsSoundRange    = 1200.0f;
+                    g::visualsSoundDuration = 1.2f;
+                    g::visualsSoundFootsteps = true;
+                    g::visualsSoundShots     = true;
+                    g::visualsSoundReloads   = true;
+                }
             }, true, width); });
 }
 
