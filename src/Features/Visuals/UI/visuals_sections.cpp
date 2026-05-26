@@ -111,19 +111,7 @@ namespace
         return Pixel(p.x + x, p.y + y);
     }
 
-    void DrawGearIcon(ImDrawList* drawList, const ImVec2& center, ImU32 color)
-    {
-        ImVec2 teeth[16] = {};
-        for (int i = 0; i < 16; ++i) {
-            const float a = (static_cast<float>(i) * kPi) / 8.0f;
-            const float r = (i % 2 == 0) ? 7.4f : 5.7f;
-            teeth[i] = Pixel(center.x + std::cos(a) * r, center.y + std::sin(a) * r);
-        }
-        drawList->AddPolyline(teeth, 16, color, ImDrawFlags_Closed, 1.35f);
-        drawList->AddCircle(center, 2.2f, color, 16, 1.25f);
-    }
-
-    void DrawSoftIconCircle(ImDrawList* drawList, const ImVec2& center, float radius, ImU32 color)
+void DrawSoftIconCircle(ImDrawList* drawList, const ImVec2& center, float radius, ImU32 color)
     {
         drawList->AddCircle(center, radius, color, 28, 1.35f);
     }
@@ -353,31 +341,7 @@ namespace
         return clicked;
     }
 
-    bool GearButton(const char* id)
-    {
-        ImGui::PushID(id);
-        const ImVec2 size(26.0f, 26.0f);
-        const ImVec2 pos = ImGui::GetCursorScreenPos();
-        ImGui::InvisibleButton("##gear", size);
-        const bool clicked = ImGui::IsItemClicked(ImGuiMouseButton_Left);
-        const bool hovered = ImGui::IsItemHovered();
-
-        ImDrawList* drawList = ImGui::GetWindowDrawList();
-        drawList->AddRectFilled(
-            Pixel(pos.x, pos.y),
-            Pixel(pos.x + size.x, pos.y + size.y),
-            hovered ? ColorU32(25, 36, 52, 248) : ColorU32(14, 22, 34, 238),
-            7.0f);
-        drawList->AddRect(
-            Pixel(pos.x, pos.y),
-            Pixel(pos.x + size.x, pos.y + size.y),
-            ColorU32(60, 78, 105, hovered ? 245 : 170),
-            7.0f);
-        DrawGearIcon(drawList, Pixel(pos.x + size.x * 0.5f, pos.y + size.y * 0.5f), ColorU32(170, 184, 205, hovered ? 255 : 220));
-
-        ImGui::PopID();
-        return clicked;
-    }
+    static ImGuiStorage s_expandState;
 
     void ColorRow(const char* id, const char* label, float* color);
 
@@ -433,52 +397,69 @@ namespace
         (void)description;
 
         const float rightPad = 12.0f;
-        const float gearWidth = showSettings ? 32.0f : 0.0f;
+        const float gearWidth = showSettings ? 28.0f : 0.0f;
         const float toggleX = rowMax.x - rightPad - gearWidth - 38.0f - (showSettings ? 8.0f : 0.0f);
+
+        // Per-row expand state keyed by the current ImGui ID scope
+        const ImGuiID expandKey = ImGui::GetID("##xp");
+        const bool expanded = showSettings && s_expandState.GetBool(expandKey, false);
+
+        // Clicking the label/icon area toggles the inline panel
+        if (showSettings) {
+            const ImVec2 clickZoneMax(toggleX - 10.0f, rowMax.y);
+            if (ImGui::IsMouseHoveringRect(rowPos, clickZoneMax)) {
+                ImGui::SetMouseCursor(ImGuiMouseCursor_Hand);
+                if (ImGui::IsMouseClicked(ImGuiMouseButton_Left))
+                    s_expandState.SetBool(expandKey, !expanded);
+            }
+        }
+
+        // Chevron indicator (▶ collapsed / ▼ expanded)
+        if (showSettings) {
+            const float cx = rowMax.x - rightPad - 14.0f;
+            const float cy = rowPos.y + kVisualsRowHeight * 0.5f;
+            constexpr float cs = 5.0f;
+            const ImU32 chevCol = ColorU32(155, 175, 205, rowHovered ? 220 : 155);
+            if (expanded)
+                drawList->AddTriangleFilled(
+                    ImVec2(cx - cs,        cy - cs * 0.45f),
+                    ImVec2(cx + cs,        cy - cs * 0.45f),
+                    ImVec2(cx,             cy + cs * 0.55f), chevCol);
+            else
+                drawList->AddTriangleFilled(
+                    ImVec2(cx - cs * 0.45f, cy - cs),
+                    ImVec2(cx - cs * 0.45f, cy + cs),
+                    ImVec2(cx + cs * 0.55f, cy),             chevCol);
+        }
+
         ImGui::SetCursorScreenPos(ImVec2(toggleX, rowPos.y + (kVisualsRowHeight - 20.0f) * 0.5f));
         ToggleSwitch("toggle", enabled);
-
-        if (showSettings) {
-            ImGui::SetCursorScreenPos(ImVec2(rowMax.x - rightPad - 26.0f, rowPos.y + (kVisualsRowHeight - 26.0f) * 0.5f));
-            if (GearButton("settings"))
-                ImGui::OpenPopup("##cfg");
-        }
 
         ImGui::SetCursorScreenPos(ImVec2(rowPos.x, rowMax.y + kVisualsRowGap));
         ImGui::Dummy(ImVec2(rowWidth, 1.0f));
 
-        ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(14.0f, 12.0f));
-        ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 10.0f);
-        ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 7.0f);
-        ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(8.0f, 8.0f));
-        ImGui::PushStyleColor(ImGuiCol_PopupBg, ImVec4(0.035f, 0.055f, 0.085f, 0.98f));
-        ImGui::PushStyleColor(ImGuiCol_Border, ImVec4(0.16f, 0.24f, 0.36f, 0.82f));
-        ImGui::PushStyleColor(ImGuiCol_FrameBg, ImVec4(0.07f, 0.10f, 0.15f, 1.0f));
-        ImGui::PushStyleColor(ImGuiCol_FrameBgHovered, ImVec4(0.10f, 0.14f, 0.21f, 1.0f));
-        ImGui::PushStyleColor(ImGuiCol_SliderGrab, ImVec4(0.20f, 0.48f, 1.0f, 1.0f));
-        ImGui::PushStyleColor(ImGuiCol_CheckMark, ImVec4(0.20f, 0.48f, 1.0f, 1.0f));
-        ImGui::SetNextWindowSizeConstraints(ImVec2(380.0f, 0.0f), ImVec2(560.0f, FLT_MAX));
-        if (ImGui::BeginPopup("##cfg")) {
-            ImGui::TextColored(ImVec4(0.86f, 0.92f, 1.0f, 1.0f), "%s Settings", label);
-            ImDrawList* popupDrawList = ImGui::GetWindowDrawList();
-            const ImVec2 linePos = ImGui::GetCursorScreenPos();
-            popupDrawList->AddRectFilled(
-                linePos,
-                ImVec2(linePos.x + ImGui::GetContentRegionAvail().x, linePos.y + 1.0f),
-                ColorU32(52, 105, 186, 138),
-                1.0f);
-            ImGui::Spacing();
-            ImGui::Spacing();
-
-            if (color)
-                ColorRow("accent", "Accent Color", color);
-
-            extraFn();
-
-            ImGui::EndPopup();
+        if (expanded) {
+            ImGui::PushStyleVar(ImGuiStyleVar_ChildRounding, 8.0f);
+            ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12.0f, 10.0f));
+            ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 7.0f);
+            ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(8.0f, 8.0f));
+            ImGui::PushStyleColor(ImGuiCol_ChildBg,        ImVec4(0.035f, 0.055f, 0.085f, 0.98f));
+            ImGui::PushStyleColor(ImGuiCol_Border,         ImVec4(0.16f,  0.24f,  0.36f,  0.82f));
+            ImGui::PushStyleColor(ImGuiCol_FrameBg,        ImVec4(0.07f,  0.10f,  0.15f,  1.0f));
+            ImGui::PushStyleColor(ImGuiCol_FrameBgHovered, ImVec4(0.10f,  0.14f,  0.21f,  1.0f));
+            ImGui::PushStyleColor(ImGuiCol_SliderGrab,     ImVec4(0.20f,  0.48f,  1.0f,   1.0f));
+            ImGui::PushStyleColor(ImGuiCol_CheckMark,      ImVec4(0.20f,  0.48f,  1.0f,   1.0f));
+            if (ImGui::BeginChild("##exp", ImVec2(rowWidth, 0.0f),
+                                  ImGuiChildFlags_AutoResizeY | ImGuiChildFlags_Borders)) {
+                if (color)
+                    ColorRow("accent", "Accent Color", color);
+                extraFn();
+            }
+            ImGui::EndChild();
+            ImGui::PopStyleColor(6);
+            ImGui::PopStyleVar(4);
+            ImGui::Dummy(ImVec2(rowWidth, kVisualsRowGap));
         }
-        ImGui::PopStyleColor(6);
-        ImGui::PopStyleVar(4);
 
         ImGui::PopID();
     }
