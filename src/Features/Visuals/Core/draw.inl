@@ -194,8 +194,8 @@ void visuals::Draw()
                 continue;
             if (!g::visualsShowTeammates && (localTeam == 2 || localTeam == 3) && p.team == localTeam)
                 continue;
-            if (g::visualsVisibleOnly) {
-                bool effectiveVisible = p.visible;
+            bool effectiveVisible = p.visible;
+            {
                 const uint64_t liveUpdatedUs = s_liveVisibilityUpdatedUs[i].load(std::memory_order_relaxed);
                 if (liveUpdatedUs > 0 &&
                     nowUs >= liveUpdatedUs &&
@@ -204,9 +204,8 @@ void visuals::Draw()
                     if (live == 2) effectiveVisible = true;
                     else if (live == 1) effectiveVisible = false;
                 }
-                if (!effectiveVisible)
-                    continue;
             }
+            const bool filteredByVisibleOnly = g::visualsVisibleOnly && !effectiveVisible;
 
             const visuals::PlayerData& prevP = prevPlayers[i];
             const bool canBlendSnapshots =
@@ -418,6 +417,8 @@ void visuals::Draw()
 #include "../Render/player_offscreen_arrows.inl"
                 continue;
             }
+            if (filteredByVisibleOnly)
+                continue;
 
             float boxHeight = screenFeet.y - screenHead.y;
             if (boxHeight < 4.0f && fallbackOnScreen) {

@@ -12,6 +12,11 @@ namespace
     {
         g::radarSize = 290.0f;
         g::radarDotSize = 4.0f;
+        g::radarCs2HudScale = 0.85f;
+        g::radarPosOffsetX = 0.0f;
+        g::radarPosOffsetY = 0.0f;
+        g::radarAnchorBottomLeft = false;
+        g::radarCircularMask = false;
         radar::ResetActiveMapCalibration();
         statusSink.SetStatus("Radar map calibration reset.");
     }
@@ -26,6 +31,17 @@ void ui::tabs::radar_sections::RenderCalibrationSection(IStatusSink& statusSink)
         return;
 
     ImGui::Dummy(ImVec2(0.0f, 6.0f));
+
+    ui::widgets::TwoColumnRows("##radar_anchor_row",
+        [] { ui::widgets::ToggleRow("anchor_bl", "CS2 Minimap Mode", &g::radarAnchorBottomLeft); },
+        [] { ui::widgets::ToggleRow("circular", "Circular Mask", &g::radarCircularMask); });
+    ImGui::Dummy(ImVec2(0.0f, 2.0f));
+
+    ui::widgets::SliderFloatRow("cs2_hud_scale", "CS2 HUD Scale", &g::radarCs2HudScale, 0.50f, 1.50f, "%.2f");
+    ui::widgets::SliderFloatRow("pos_offset_x", "Position X", &g::radarPosOffsetX, -200.0f, 200.0f, "%.0f px");
+    ui::widgets::SliderFloatRow("pos_offset_y", "Position Y", &g::radarPosOffsetY, -200.0f, 200.0f, "%.0f px");
+    ImGui::Dummy(ImVec2(0.0f, 4.0f));
+
     ui::widgets::SliderFloatRow("size", "Size", &g::radarSize, 100.0f, 400.0f, "%.0f");
     ui::widgets::SliderFloatRow("dot_size", "Dot Size", &g::radarDotSize, 2.0f, 8.0f, "%.1f");
     ui::widgets::SliderFloatRow("rotation", "Map Rotation", &g::radarWorldRotationDeg, -180.0f, 180.0f, "%.1f deg");

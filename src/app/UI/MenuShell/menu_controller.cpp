@@ -112,24 +112,27 @@ void ui::MenuController::Render()
     HandleMenuKeyCapture();
 
     static const std::string menuTitle = app::build_info::RuntimeTitle() + "###main_menu";
-    static bool s_forceStartupCenter = true;
+    static bool s_positionApplied = false;
 
     ImGui::SetNextWindowSize(ImVec2(720, 660), ImGuiCond_FirstUseEver);
     ImGui::SetNextWindowSizeConstraints(ImVec2(640, 520), ImVec2(980, 900));
     const ImVec2 displaySize = ImGui::GetIO().DisplaySize;
     if (displaySize.x > 0.0f && displaySize.y > 0.0f) {
-        const ImVec2 centeredPos(displaySize.x * 0.5f, displaySize.y * 0.5f);
-        ImGui::SetNextWindowPos(
-            centeredPos,
-            s_forceStartupCenter ? ImGuiCond_Always : ImGuiCond_Appearing,
-            ImVec2(0.5f, 0.5f));
+        if (!s_positionApplied && g::menuPosX >= 0.0f && g::menuPosY >= 0.0f) {
+            ImGui::SetNextWindowPos(ImVec2(g::menuPosX, g::menuPosY), ImGuiCond_Always);
+        } else if (!s_positionApplied) {
+            ImGui::SetNextWindowPos(
+                ImVec2(displaySize.x * 0.5f, displaySize.y * 0.5f),
+                ImGuiCond_Always,
+                ImVec2(0.5f, 0.5f));
+        }
     }
     if (!ImGui::Begin(menuTitle.c_str(), &g::menuOpen, ImGuiWindowFlags_NoCollapse)) {
-        s_forceStartupCenter = false;
+        s_positionApplied = true;
         ImGui::End();
         return;
     }
-    s_forceStartupCenter = false;
+    s_positionApplied = true;
 
     if (displaySize.x > 0.0f && displaySize.y > 0.0f) {
         const ImVec2 windowPos = ImGui::GetWindowPos();
@@ -143,6 +146,9 @@ void ui::MenuController::Render()
                 (displaySize.x - windowSize.x) * 0.5f,
                 (displaySize.y - windowSize.y) * 0.5f));
         }
+        const ImVec2 finalPos = ImGui::GetWindowPos();
+        g::menuPosX = finalPos.x;
+        g::menuPosY = finalPos.y;
     }
 
     const float contentIndent = 8.0f;

@@ -67,4 +67,15 @@ if (g::visualsSkeleton) {
             }
         }
     }
+
+    if (g::visualsSkeletonHeadCircle) {
+        ImVec2 headScreenPos;
+        if (canRenderRealSkeleton && boneScreenValid[visuals::HEAD])
+            headScreenPos = ImVec2(boneScreen[visuals::HEAD].x, boneScreen[visuals::HEAD].y);
+        else
+            headScreenPos = ImVec2(screenHead.x, screenHead.y);
+        const float headRadius = std::max(3.0f, boxHeight * g::visualsSkeletonHeadCircleSize);
+        drawList->AddCircle(headScreenPos, headRadius, IM_COL32(0, 0, 0, 180), 0, skelOuter);
+        drawList->AddCircle(headScreenPos, headRadius, skeletonRenderCol, 0, skelInner);
+    }
 }

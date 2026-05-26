@@ -22,6 +22,8 @@
         LoadFloat(root, visualsSectionKey, "DistanceSize", g::visualsDistanceSize);
         LoadBool(root, visualsSectionKey, "Skeleton", g::visualsSkeleton);
         LoadBool(root, visualsSectionKey, "SkeletonDots", g::visualsSkeletonDots);
+        LoadBool(root, visualsSectionKey, "SkeletonHeadCircle", g::visualsSkeletonHeadCircle);
+        LoadFloat(root, visualsSectionKey, "SkeletonHeadCircleSize", g::visualsSkeletonHeadCircleSize);
         LoadBool(root, visualsSectionKey, "Snaplines", g::visualsSnaplines);
         LoadBool(root, visualsSectionKey, "SnapFromTop", g::visualsSnaplineFromTop);
         LoadBool(root, visualsSectionKey, "VisibilityColoring", g::visualsVisibilityColoring);
@@ -102,6 +104,11 @@
         LoadBool(root, "Radar", "SpectatorList", g::radarSpectatorList);
         LoadFloat(root, "Radar", "SpectatorListX", g::radarSpectatorListX);
         LoadFloat(root, "Radar", "SpectatorListY", g::radarSpectatorListY);
+        LoadBool(root, "Radar", "AnchorBottomLeft", g::radarAnchorBottomLeft);
+        LoadFloat(root, "Radar", "Cs2HudScale", g::radarCs2HudScale);
+        LoadFloat(root, "Radar", "PosOffsetX", g::radarPosOffsetX);
+        LoadFloat(root, "Radar", "PosOffsetY", g::radarPosOffsetY);
+        LoadBool(root, "Radar", "CircularMask", g::radarCircularMask);
 
         LoadBool(root, "WEBRadar", "Enabled", g::webRadarEnabled);
         LoadInt(root, "WEBRadar", "Port", g::webRadarPort);
@@ -116,3 +123,6 @@
         LoadBool(root, "UI", "WebRadarQrOpen", g::webRadarQrOpen);
         LoadBool(root, "UI", "WebRadarDebugOpen", g::webRadarDebugOpen);
         LoadInt(root, "UI", "MenuToggleKey", g::menuToggleKey);
+        LoadBool(root, "UI", "MenuOpen", g::menuOpen);
+        LoadFloat(root, "UI", "MenuPosX", g::menuPosX);
+        LoadFloat(root, "UI", "MenuPosY", g::menuPosY);

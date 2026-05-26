@@ -6,7 +6,7 @@ if (g::radarEnabled) {
     const float hudScale = screenH / 1080.0f;
     const float cs2MinimapMarginX = 5.0f * hudScale;
     const float cs2MinimapMarginY = 7.0f * hudScale;
-    const float cs2MinimapSize = 290.0f * hudScale;
+    const float cs2MinimapSize = 290.0f * hudScale * std::clamp(g::radarCs2HudScale, 0.5f, 1.5f);
 
     const float calibrationRad = g::radarWorldRotationDeg * (std::numbers::pi_v<float> / 180.0f);
     const float calibrationCos = cosf(calibrationRad);
@@ -29,8 +29,10 @@ if (g::radarEnabled) {
     const float radarSz = g::radarSize;
     const float halfRad = radarSz * 0.5f;
     const float screenClampMargin = 4.0f * hudScale;
-    float radarPosX = cs2MinimapMarginX;
-    float radarPosY = cs2MinimapMarginY;
+    float radarPosX = cs2MinimapMarginX + g::radarPosOffsetX;
+    float radarPosY = g::radarAnchorBottomLeft
+        ? (screenH - radarSz - cs2MinimapMarginY + g::radarPosOffsetY)
+        : (cs2MinimapMarginY + g::radarPosOffsetY);
 
     if (radarPosX < screenClampMargin) radarPosX = screenClampMargin;
     if (radarPosY < screenClampMargin) radarPosY = screenClampMargin;
@@ -44,8 +46,16 @@ if (g::radarEnabled) {
     const ImU32 radarBombCol = ColorToImU32(g::radarBombColor);
     const ImU32 radarAngleCol = ColorToImU32(g::radarAngleColor);
     const ImU32 radarBorderCol = ColorToImU32(g::radarBorderColor);
-    
-    drawList->AddRect(radarPos, radarEnd, radarBorderCol);
+    const ImU32 radarBgCol = ColorToImU32(g::radarBgColor);
+    const bool useCircle = g::radarCircularMask;
+
+    if (useCircle) {
+        drawList->AddCircleFilled(radarCenter, halfRad, radarBgCol);
+        drawList->AddCircle(radarCenter, halfRad, radarBorderCol, 0, 1.5f);
+    } else {
+        drawList->AddRectFilled(radarPos, radarEnd, radarBgCol);
+        drawList->AddRect(radarPos, radarEnd, radarBorderCol);
+    }
     if (g::radarShowCrosshair) {
         drawList->AddLine(ImVec2(radarCenter.x, radarPos.y), ImVec2(radarCenter.x, radarEnd.y), IM_COL32(255, 255, 255, 26));
         drawList->AddLine(ImVec2(radarPos.x, radarCenter.y), ImVec2(radarEnd.x, radarCenter.y), IM_COL32(255, 255, 255, 26));
@@ -163,10 +173,22 @@ if (g::radarEnabled) {
             px = radarCenter.x + calRight * scale;
             py = radarCenter.y - calForward * scale;
         }
-        if (px < radarPos.x + 3.0f) px = radarPos.x + 3.0f;
-        if (px > radarEnd.x - 3.0f) px = radarEnd.x - 3.0f;
-        if (py < radarPos.y + 3.0f) py = radarPos.y + 3.0f;
-        if (py > radarEnd.y - 3.0f) py = radarEnd.y - 3.0f;
+        if (useCircle) {
+            constexpr float kCircleMargin = 3.0f;
+            const float maxR = halfRad - kCircleMargin;
+            const float cdx = px - radarCenter.x;
+            const float cdy = py - radarCenter.y;
+            const float cdist = std::sqrt(cdx * cdx + cdy * cdy);
+            if (cdist > maxR && cdist > 0.0001f) {
+                px = radarCenter.x + cdx / cdist * maxR;
+                py = radarCenter.y + cdy / cdist * maxR;
+            }
+        } else {
+            if (px < radarPos.x + 3.0f) px = radarPos.x + 3.0f;
+            if (px > radarEnd.x - 3.0f) px = radarEnd.x - 3.0f;
+            if (py < radarPos.y + 3.0f) py = radarPos.y + 3.0f;
+            if (py > radarEnd.y - 3.0f) py = radarEnd.y - 3.0f;
+        }
 
         if (outX) *outX = px;
         if (outY) *outY = py;

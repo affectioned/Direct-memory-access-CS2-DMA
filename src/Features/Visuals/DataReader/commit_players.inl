@@ -240,6 +240,12 @@
                 p.hasBones = false;
                 memset(p.bones, 0, sizeof(p.bones));
                 p.soundUntilMs = 0;
+                s_liveVisible[i].store(0, std::memory_order_relaxed);
+                s_liveVisibilityUpdatedUs[i].store(0, std::memory_order_relaxed);
+                s_prevShotsFired[i] = 0;
+                s_prevInReload[i] = 0;
+                s_soundPrevStateValid[i] = false;
+                s_lastFootstepEmitUs[i] = 0;
             }
             const bool respawnedThisFrame =
                 hadTrackedPlayerNow &&
@@ -265,6 +271,14 @@
                 p.hasBones = false;
                 memset(p.bones, 0, sizeof(p.bones));
                 p.soundUntilMs = 0;
+            }
+            if (respawnedThisFrame) {
+                s_liveVisible[i].store(0, std::memory_order_relaxed);
+                s_liveVisibilityUpdatedUs[i].store(0, std::memory_order_relaxed);
+                s_prevShotsFired[i] = 0;
+                s_prevInReload[i] = 0;
+                s_soundPrevStateValid[i] = false;
+                s_lastFootstepEmitUs[i] = 0;
             }
             p.valid = true;
             p.pawn = pawns[i];

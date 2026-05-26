@@ -673,7 +673,15 @@ static void ResetRuntimeState(bool publishClearedSnapshot = false)
             s_playerDeathConfirmCount[i] = 0;
             s_prevRawPlayerPos[i] = {};
             s_prevRawPlayerPosReady[i] = false;
+            s_livePawnPointers[i].store(0, std::memory_order_relaxed);
+            s_liveVisible[i].store(0, std::memory_order_relaxed);
+            s_liveVisibilityUpdatedUs[i].store(0, std::memory_order_relaxed);
+            s_prevShotsFired[i] = 0;
+            s_prevInReload[i] = 0;
+            s_soundPrevStateValid[i] = false;
+            s_lastFootstepEmitUs[i] = 0;
         }
+        s_liveLocalMaskBit.store(-1, std::memory_order_relaxed);
         s_bombState = {};
         s_spectatorCount = 0;
         memset(s_spectators, 0, sizeof(s_spectators));

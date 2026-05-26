@@ -67,6 +67,8 @@ namespace g {
     inline float& visualsDistanceSize = visualsSettings.distanceSize;
     inline bool& visualsSkeleton = visualsSettings.skeleton;
     inline bool& visualsSkeletonDots = visualsSettings.skeletonDots;
+    inline bool& visualsSkeletonHeadCircle = visualsSettings.skeletonHeadCircle;
+    inline float& visualsSkeletonHeadCircleSize = visualsSettings.skeletonHeadCircleSize;
     inline bool& visualsSnaplines = visualsSettings.snaplines;
     inline bool& visualsSnaplineFromTop = visualsSettings.snaplineFromTop;
     inline bool& visualsVisibilityColoring = visualsSettings.visibilityColoring;
@@ -135,6 +137,11 @@ namespace g {
     inline bool& radarSpectatorList = radarSettings.spectatorList;
     inline float& radarSpectatorListX = radarSettings.spectatorListX;
     inline float& radarSpectatorListY = radarSettings.spectatorListY;
+    inline bool& radarAnchorBottomLeft = radarSettings.anchorBottomLeft;
+    inline float& radarCs2HudScale = radarSettings.cs2HudScale;
+    inline float& radarPosOffsetX = radarSettings.posOffsetX;
+    inline float& radarPosOffsetY = radarSettings.posOffsetY;
+    inline bool& radarCircularMask = radarSettings.circularMask;
 
     inline bool& webRadarEnabled = webRadarSettings.enabled;
     inline int& webRadarIntervalMs = webRadarSettings.intervalMs;
@@ -144,6 +151,8 @@ namespace g {
     inline bool& webRadarDebugOpen = webRadarSettings.debugOpen;
 
     inline int& menuToggleKey = uiSettings.menuToggleKey;
+    inline float& menuPosX = uiSettings.menuPosX;
+    inline float& menuPosY = uiSettings.menuPosY;
     inline bool& vsyncEnabled = displaySettings.vsyncEnabled;
     inline int& fpsLimit = displaySettings.fpsLimit;
 

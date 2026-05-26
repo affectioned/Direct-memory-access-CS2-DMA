@@ -222,9 +222,27 @@ namespace
     }
 }
 
+static BOOL WINAPI ConsoleCtrlHandler(DWORD ctrlType)
+{
+    if (ctrlType == CTRL_CLOSE_EVENT ||
+        ctrlType == CTRL_C_EVENT ||
+        ctrlType == CTRL_BREAK_EVENT ||
+        ctrlType == CTRL_LOGOFF_EVENT ||
+        ctrlType == CTRL_SHUTDOWN_EVENT)
+    {
+        g::running = false;
+        // Give the main thread up to 4 seconds to unwind cleanly before
+        // Windows forcibly kills the process (the default budget is 5s).
+        Sleep(4000);
+        return TRUE;
+    }
+    return FALSE;
+}
+
 int main(int argc, char* argv[])
 {
     timeBeginPeriod(1);
+    SetConsoleCtrlHandler(ConsoleCtrlHandler, TRUE);
 
     const bool verboseLogs = HasFlag(argc, argv, "--verbose");
     const bool offsetsSelfTest = HasFlag(argc, argv, "--offsets-self-test");
@@ -404,6 +422,7 @@ int main(int argc, char* argv[])
     struct ShutdownGuard {
         ~ShutdownGuard()
         {
+            config::Save();
             webradar::Shutdown();
             visuals::StopDataWorker();
             overlay::Destroy();

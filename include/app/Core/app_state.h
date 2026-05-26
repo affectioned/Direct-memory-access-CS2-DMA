@@ -83,6 +83,8 @@ namespace app::state {
         float distanceSize = 0.0f;
         bool skeleton = true;
         bool skeletonDots = false;
+        bool skeletonHeadCircle = false;
+        float skeletonHeadCircleSize = 0.115f;
         bool snaplines = false;
         bool snaplineFromTop = false;
         bool visibilityColoring = true;
@@ -153,6 +155,11 @@ namespace app::state {
         bool spectatorList = false;
         float spectatorListX = 24.0f;
         float spectatorListY = 300.0f;
+        bool anchorBottomLeft = false;
+        float cs2HudScale = 0.85f;
+        float posOffsetX = 0.0f;
+        float posOffsetY = 0.0f;
+        bool circularMask = false;
     };
 
     struct WebRadarSettings {
@@ -166,6 +173,8 @@ namespace app::state {
 
     struct UiSettings {
         int menuToggleKey = 'P';
+        float menuPosX = -1.0f;
+        float menuPosY = -1.0f;
     };
 
     struct FontState {

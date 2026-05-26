@@ -767,6 +767,8 @@ void ui::tabs::visuals_sections::RenderOptionsGrid()
             }, true, width); },
         [] (float width) { DrawOptionRow("skeleton", VisualsIcon::Skeleton, "Skeleton", "", &g::visualsSkeleton, g::visualsSkeletonColor, [] {
                 ToggleSetting("dots", "Show Dots", &g::visualsSkeletonDots);
+                ToggleSetting("head_circle", "Head Circle", &g::visualsSkeletonHeadCircle);
+                FloatRow("head_circle_sz", "Head Circle Size", &g::visualsSkeletonHeadCircleSize, 0.05f, 0.30f, "%.3f");
                 FloatRow("thick", "Thickness", &g::visualsThickness, 0.3f, 2.0f, "%.2f");
             }, true, width); });
 
@@ -854,6 +856,7 @@ void ui::tabs::visuals_sections::RenderPlayerVisualsSection()
 {
     DrawOptionRow("skeleton", VisualsIcon::Skeleton, "Skeleton", "Draw player skeleton", &g::visualsSkeleton, g::visualsSkeletonColor, [] {
         ToggleSetting("dots", "Show Dots", &g::visualsSkeletonDots);
+        ToggleSetting("head_circle", "Head Circle", &g::visualsSkeletonHeadCircle);
         FloatRow("thick", "Thickness", &g::visualsThickness, 0.3f, 2.0f, "%.2f");
     });
 

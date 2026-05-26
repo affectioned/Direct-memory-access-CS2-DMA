@@ -24,6 +24,8 @@
         visuals["DistanceSize"] = g::visualsDistanceSize;
         visuals["Skeleton"] = g::visualsSkeleton;
         visuals["SkeletonDots"] = g::visualsSkeletonDots;
+        visuals["SkeletonHeadCircle"] = g::visualsSkeletonHeadCircle;
+        visuals["SkeletonHeadCircleSize"] = g::visualsSkeletonHeadCircleSize;
         visuals["Snaplines"] = g::visualsSnaplines;
         visuals["SnapFromTop"] = g::visualsSnaplineFromTop;
         visuals["VisibilityColoring"] = g::visualsVisibilityColoring;
@@ -112,6 +114,11 @@
         radar["SpectatorList"] = g::radarSpectatorList;
         radar["SpectatorListX"] = g::radarSpectatorListX;
         radar["SpectatorListY"] = g::radarSpectatorListY;
+        radar["AnchorBottomLeft"] = g::radarAnchorBottomLeft;
+        radar["Cs2HudScale"] = g::radarCs2HudScale;
+        radar["PosOffsetX"] = g::radarPosOffsetX;
+        radar["PosOffsetY"] = g::radarPosOffsetY;
+        radar["CircularMask"] = g::radarCircularMask;
 
         json& webRadar = EnsureSection(root, "WEBRadar");
         webRadar["Enabled"] = g::webRadarEnabled;
@@ -128,6 +135,9 @@
         ui["WebRadarQrOpen"] = g::webRadarQrOpen;
         ui["WebRadarDebugOpen"] = g::webRadarDebugOpen;
         ui["MenuToggleKey"] = g::menuToggleKey;
+        ui["MenuOpen"] = g::menuOpen;
+        ui["MenuPosX"] = g::menuPosX;
+        ui["MenuPosY"] = g::menuPosY;
 
         std::filesystem::path path(jsonPath);
         std::error_code ec;

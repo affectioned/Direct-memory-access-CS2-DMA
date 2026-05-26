@@ -1,10 +1,8 @@
 if (g::visualsOffscreenArrows) {
-    const float dx = renderPlayerPos.x - renderLocalPos.x;
-    const float dy = renderPlayerPos.y - renderLocalPos.y;
-    const float relForward = dx * yawCos + dy * yawSin;
-    const float relRight = -dx * yawSin + dy * yawCos;
-    float dirX = relRight;
-    float dirY = -relForward;
+    const float px = viewMatrix[0][0]*renderPlayerPos.x + viewMatrix[0][1]*renderPlayerPos.y + viewMatrix[0][2]*renderPlayerPos.z + viewMatrix[0][3];
+    const float py = viewMatrix[1][0]*renderPlayerPos.x + viewMatrix[1][1]*renderPlayerPos.y + viewMatrix[1][2]*renderPlayerPos.z + viewMatrix[1][3];
+    float dirX = px;
+    float dirY = -py;
     const float len = static_cast<float>(std::hypot(dirX, dirY));
     if (len > 0.001f) {
         dirX /= len;
@@ -25,7 +23,7 @@ if (g::visualsOffscreenArrows) {
             base.y - dirY * arrowSize * 0.85f - perpY * arrowSize * 0.70f);
         ImU32 renderArrowCol = offscreenCol;
         if (g::visualsVisibilityColoring)
-            renderArrowCol = p.visible ? visibleCol : hiddenCol;
+            renderArrowCol = effectiveVisible ? visibleCol : hiddenCol;
         drawList->AddTriangleFilled(tip, left, right, renderArrowCol);
         drawList->AddTriangle(tip, left, right, IM_COL32(0, 0, 0, 220), 2.0f);
     }
