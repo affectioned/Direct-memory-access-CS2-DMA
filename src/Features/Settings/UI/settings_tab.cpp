@@ -26,6 +26,8 @@ void ui::tabs::SettingsTab::Render(MenuState& state, IStatusSink& statusSink)
     const float leftWidth = (safeWidth - panelGap) * 0.42f;
 
     ImGui::BeginChild("##settings_left_panel", ImVec2(leftWidth, 0.0f), ImGuiChildFlags_Borders);
+    settings_sections::RenderPresetsSection(statusSink);
+    ImGui::Dummy(ImVec2(0.0f, 12.0f));
     settings_sections::RenderProfilesSection(state, statusSink);
     ImGui::Dummy(ImVec2(0.0f, 12.0f));
     settings_sections::RenderControlsSection(state, statusSink);

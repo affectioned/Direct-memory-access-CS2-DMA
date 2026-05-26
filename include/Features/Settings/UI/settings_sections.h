@@ -5,9 +5,10 @@
 
 namespace ui::tabs::settings_sections {
 
+void RenderPresetsSection(IStatusSink& statusSink);
 void RenderProfilesSection(MenuState& state, IStatusSink& statusSink);
 void RenderControlsSection(MenuState& state, IStatusSink& statusSink);
 void RenderScreenSection(IStatusSink& statusSink);
 void RenderDebugWindow(bool* open);
 
-} 
+}

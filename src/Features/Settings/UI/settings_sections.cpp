@@ -50,6 +50,128 @@ namespace
     }
 }
 
+void ui::tabs::settings_sections::RenderPresetsSection(IStatusSink& statusSink)
+{
+    const float contentWidth = ImGui::GetContentRegionAvail().x;
+    const float innerGap = 10.0f;
+    const float halfWidth = (contentWidth - innerGap) * 0.5f;
+
+    ui::widgets::SectionTitle("Presets");
+    ImGui::TextDisabled("Apply a curated playstyle in one click.");
+    ImGui::Dummy(ImVec2(0.0f, 8.0f));
+
+    if (ImGui::Button("Legit", ImVec2(halfWidth, 34.0f))) {
+        // Minimal, visible-only ESP — only what you'd see in a legit game
+        g::visualsEnabled = true;
+        g::visualsVisibleOnly = true;
+        g::visualsVisibilityColoring = true;
+        g::visualsBox = false;
+        g::visualsHealth = false;
+        g::visualsHealthText = false;
+        g::visualsArmor = false;
+        g::visualsArmorText = false;
+        g::visualsName = false;
+        g::visualsWeapon = false;
+        g::visualsWeaponText = false;
+        g::visualsWeaponIcon = false;
+        g::visualsWeaponAmmo = false;
+        g::visualsDistance = false;
+        g::visualsSkeleton = false;
+        g::visualsSkeletonDots = false;
+        g::visualsSkeletonHeadCircle = false;
+        g::visualsSnaplines = false;
+        g::visualsOffscreenArrows = false;
+        g::visualsShowTeammates = false;
+        g::visualsFlags = false;
+        g::visualsItem = false;
+        g::visualsFlagBlind = false;
+        g::visualsFlagScoped = false;
+        g::visualsFlagDefusing = false;
+        g::visualsFlagKit = false;
+        g::visualsFlagMoney = false;
+        g::visualsWorld = false;
+        g::visualsWorldProjectiles = false;
+        g::visualsWorldSmokeTimer = false;
+        g::visualsWorldInfernoTimer = false;
+        g::visualsWorldDecoyTimer = false;
+        g::visualsWorldExplosiveTimer = false;
+        g::visualsBombInfo = false;
+        g::visualsBombText = false;
+        g::visualsBombTime = false;
+        g::visualsSound = true;
+        g::visualsSoundFootsteps = true;
+        g::visualsSoundShots = false;
+        g::visualsSoundReloads = false;
+        g::visualsSoundSmokeCheck = true;
+        g::visualsSoundRange = 800.0f;
+        g::visualsSoundDuration = 1.0f;
+        g::visualsThickness = 1.0f;
+        g::radarEnabled = false;
+        statusSink.SetStatus("Preset applied: Legit");
+    }
+    if (ImGui::IsItemHovered()) {
+        ImGui::SetTooltip("Visible enemies only, no ESP decorations.\nFootstep sound rings, no radar.");
+    }
+
+    ImGui::SameLine(0.0f, innerGap);
+
+    if (ImGui::Button("Closeted Legit", ImVec2(halfWidth, 34.0f))) {
+        // More features, still plausibly deniable
+        g::visualsEnabled = true;
+        g::visualsVisibleOnly = false;
+        g::visualsVisibilityColoring = true;
+        g::visualsBox = true;
+        g::visualsHealth = true;
+        g::visualsHealthText = false;
+        g::visualsArmor = false;
+        g::visualsArmorText = false;
+        g::visualsName = true;
+        g::visualsNameFontSize = 13.0f;
+        g::visualsWeapon = false;
+        g::visualsWeaponText = false;
+        g::visualsWeaponIcon = true;
+        g::visualsWeaponIconNoKnife = true;
+        g::visualsWeaponIconSize = 18.0f;
+        g::visualsWeaponAmmo = false;
+        g::visualsDistance = false;
+        g::visualsSkeleton = false;
+        g::visualsSkeletonDots = false;
+        g::visualsSkeletonHeadCircle = false;
+        g::visualsSnaplines = false;
+        g::visualsOffscreenArrows = true;
+        g::visualsShowTeammates = false;
+        g::visualsFlags = true;
+        g::visualsItem = false;
+        g::visualsFlagBlind = true;
+        g::visualsFlagScoped = true;
+        g::visualsFlagDefusing = true;
+        g::visualsFlagKit = false;
+        g::visualsFlagMoney = false;
+        g::visualsWorld = true;
+        g::visualsWorldProjectiles = false;
+        g::visualsWorldSmokeTimer = true;
+        g::visualsWorldInfernoTimer = true;
+        g::visualsWorldDecoyTimer = false;
+        g::visualsWorldExplosiveTimer = false;
+        g::visualsBombInfo = true;
+        g::visualsBombText = true;
+        g::visualsBombTime = true;
+        g::visualsSound = true;
+        g::visualsSoundFootsteps = true;
+        g::visualsSoundShots = true;
+        g::visualsSoundReloads = true;
+        g::visualsSoundSmokeCheck = true;
+        g::visualsSoundRange = 1200.0f;
+        g::visualsSoundDuration = 1.2f;
+        g::visualsThickness = 1.0f;
+        g::radarEnabled = true;
+        statusSink.SetStatus("Preset applied: Closeted Legit");
+    }
+    if (ImGui::IsItemHovered()) {
+        ImGui::SetTooltip("Box, health, weapon icon, offscreen arrows.\nAll sound events, utility timers, bomb info, radar.");
+    }
+}
+
 void ui::tabs::settings_sections::RenderProfilesSection(MenuState& state, IStatusSink& statusSink)
 {
     const float innerGap = 10.0f;
