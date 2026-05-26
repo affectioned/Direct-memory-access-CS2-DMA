@@ -104,7 +104,7 @@ namespace app::state {
         bool soundFootsteps = true;
         bool soundShots = true;
         bool soundReloads = true;
-        float soundRange = 2000.0f;
+        float soundRange = 1200.0f;
         float soundDuration = 1.2f;
         std::bitset<1200> itemEnabledMask = CreateDefaultItemVisualsMask();
         float boxColor[4] = { 1.0f, 0.20f, 0.20f, 1.0f };

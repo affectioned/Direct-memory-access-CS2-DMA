@@ -22,7 +22,7 @@ if (g::visualsSound) {
         // Distance falloff: full brightness nearby, near-invisible at range limit (like audio volume)
         const float distNorm = std::sqrt(distSq) / rangeWorld;  // 0 = here, 1 = at range edge
         const float distBase = 1.0f - distNorm;
-        const float distFactor = distBase * std::sqrt(distBase);  // pow(1-d, 1.5)
+        const float distFactor = distBase * distBase * distBase;  // pow(1-d, 3) — steep rolloff
 
         const uint64_t ageUs = (nowUs > evt.createdUs) ? (nowUs - evt.createdUs) : 0;
         const float t = std::clamp(static_cast<float>(ageUs) / static_cast<float>(durationUs), 0.0f, 1.0f);
