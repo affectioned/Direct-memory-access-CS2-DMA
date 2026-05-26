@@ -111,7 +111,7 @@ void ui::MenuController::Render()
     EnsureInitialized();
     HandleMenuKeyCapture();
 
-    static const std::string menuTitle = app::build_info::RuntimeTitle() + "###main_menu";
+    static const std::string menuTitle = "KevqDMA###main_menu";
     static bool s_positionApplied = false;
 
     ImGui::SetNextWindowSize(ImVec2(720, 660), ImGuiCond_FirstUseEver);
@@ -155,14 +155,40 @@ void ui::MenuController::Render()
     ImGui::Indent(contentIndent);
 
     const visuals::DmaHealthStats dmaStats = visuals::GetDmaHealthStats();
-    ImGui::TextUnformatted("KevqDMA");
-    ImGui::SameLine(0, 4);
-    ImGui::TextDisabled("| Status:");
-    ImGui::SameLine(0, 4);
-    ImGui::TextColored(GetStatusColor(dmaStats), "%s", GetStatusText(dmaStats));
-    ImGui::SameLine(0, 4);
-    ImGui::TextDisabled("| Fail: %u", static_cast<unsigned>(dmaStats.consecutiveFailures));
 
+    // Status dot (drawn circle) with tooltip
+    {
+        const float lineH = ImGui::GetTextLineHeight();
+        const float dotR = 4.5f;
+        const ImVec2 cursorPos = ImGui::GetCursorScreenPos();
+        const ImVec2 dotCenter(cursorPos.x + dotR + 1.0f, cursorPos.y + lineH * 0.5f);
+        ImDrawList* dl = ImGui::GetWindowDrawList();
+        dl->AddCircleFilled(dotCenter, dotR, ImGui::ColorConvertFloat4ToU32(GetStatusColor(dmaStats)));
+        dl->AddCircle(dotCenter, dotR, IM_COL32(0, 0, 0, 80), 0, 1.2f);
+        ImGui::Dummy(ImVec2(dotR * 2.0f + 2.0f, lineH));
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Status: %s  |  Failures: %u",
+                GetStatusText(dmaStats),
+                static_cast<unsigned>(dmaStats.consecutiveFailures));
+    }
+    ImGui::SameLine(0, 7);
+    ImGui::TextUnformatted("KevqDMA");
+
+    // Right-aligned version tag
+    {
+        const std::string& ver = app::build_info::VersionTag();
+        const float verWidth = ImGui::CalcTextSize(ver.c_str()).x;
+        ImGui::SameLine();
+        const float rightEdge = ImGui::GetCursorPosX() + ImGui::GetContentRegionAvail().x;
+        ImGui::SetCursorPosX(rightEdge - verWidth - contentIndent);
+        ImGui::TextDisabled("%s", ver.c_str());
+    }
+
+    ImGui::Spacing();
+    ImGui::Separator();
+    ImGui::Spacing();
+
+    ImGui::PushStyleColor(ImGuiCol_TabSelected, ImVec4(0.16f, 0.26f, 0.46f, 1.0f));
     if (ImGui::BeginTabBar("##tabs", ImGuiTabBarFlags_FittingPolicyResizeDown)) {
         for (const auto& tab : tabs_) {
             if (ImGui::BeginTabItem(tab->Label())) {
@@ -172,6 +198,7 @@ void ui::MenuController::Render()
         }
         ImGui::EndTabBar();
     }
+    ImGui::PopStyleColor();
 
     RenderStatusToast(state_);
 

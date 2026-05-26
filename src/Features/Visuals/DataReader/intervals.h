@@ -27,6 +27,6 @@ namespace visuals::intervals {
     constexpr uint64_t kBombStickyDroppedUs = 1800000;
     constexpr uint64_t kBombStickyVisibleUs = 900000;
 
-    constexpr uint64_t kSoundFootstepEmitIntervalUs = 350000;
-    constexpr float    kSoundFootstepSpeedThreshold = 131.0f;
+    constexpr uint64_t kSoundFootstepEmitIntervalUs = 500000;
+    constexpr float    kSoundFootstepSpeedThreshold = 210.0f;
 }

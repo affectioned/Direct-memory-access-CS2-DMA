@@ -20,12 +20,12 @@ inline ImVec2 Pixel(float x, float y)
 inline void SectionTitle(const char* label)
 {
     ImGui::Dummy(ImVec2(0.0f, 2.0f));
-    ImGui::TextColored(ImVec4(0.86f, 0.92f, 1.0f, 1.0f), "%s", label);
+    ImGui::TextColored(ImVec4(0.72f, 0.84f, 1.0f, 1.0f), "%s", label);
     const ImVec2 p = ImGui::GetCursorScreenPos();
     ImGui::GetWindowDrawList()->AddRectFilled(
         ImVec2(p.x, p.y + 2.0f),
         ImVec2(p.x + ImGui::GetContentRegionAvail().x, p.y + 3.0f),
-        ColorU32(43, 84, 148, 98),
+        ColorU32(50, 96, 180, 120),
         1.0f);
     ImGui::Dummy(ImVec2(0.0f, 9.0f));
 }
@@ -80,20 +80,20 @@ inline void DrawRowFrame(const ImVec2& min, const ImVec2& max, bool active, bool
     drawList->AddRectFilled(
         min,
         max,
-        hovered ? ColorU32(12, 24, 39, 250) : ColorU32(8, 17, 29, 240),
+        hovered ? ColorU32(16, 26, 44, 252) : ColorU32(8, 16, 28, 242),
         8.0f);
     drawList->AddRect(
         min,
         max,
-        active ? ColorU32(38, 92, 162, hovered ? 130 : 88) : ColorU32(36, 48, 65, hovered ? 105 : 72),
+        active ? ColorU32(42, 96, 172, hovered ? 140 : 96) : ColorU32(30, 44, 68, hovered ? 110 : 62),
         8.0f,
         0,
         0.65f);
     if (active) {
         drawList->AddRectFilled(
-            ImVec2(min.x + 1.0f, min.y + 11.0f),
-            ImVec2(min.x + 2.0f, max.y - 11.0f),
-            ColorU32(37, 113, 255, 76),
+            ImVec2(min.x + 1.0f, min.y + 9.0f),
+            ImVec2(min.x + 2.5f, max.y - 9.0f),
+            ColorU32(60, 130, 255, 110),
             1.5f);
     }
 }
