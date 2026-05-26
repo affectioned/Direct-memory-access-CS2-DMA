@@ -34,6 +34,7 @@
         LoadBool(root, visualsSectionKey, "SoundFootsteps", g::visualsSoundFootsteps);
         LoadBool(root, visualsSectionKey, "SoundShots", g::visualsSoundShots);
         LoadBool(root, visualsSectionKey, "SoundReloads", g::visualsSoundReloads);
+        LoadBool(root, visualsSectionKey, "SoundSmokeCheck", g::visualsSoundSmokeCheck);
         LoadFloat(root, visualsSectionKey, "SoundRange", g::visualsSoundRange);
         LoadFloat(root, visualsSectionKey, "SoundDuration", g::visualsSoundDuration);
         LoadBool(root, visualsSectionKey, "Flags", g::visualsFlags);

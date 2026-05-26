@@ -36,6 +36,7 @@
         visuals["SoundFootsteps"] = g::visualsSoundFootsteps;
         visuals["SoundShots"] = g::visualsSoundShots;
         visuals["SoundReloads"] = g::visualsSoundReloads;
+        visuals["SoundSmokeCheck"] = g::visualsSoundSmokeCheck;
         visuals["SoundRange"] = g::visualsSoundRange;
         visuals["SoundDuration"] = g::visualsSoundDuration;
         visuals["Flags"] = g::visualsFlags;

@@ -19,6 +19,22 @@ if (g::visualsSound) {
         const float distSq = dx * dx + dy * dy + dz * dz;
         if (distSq > rangeWorld * rangeWorld) continue;
 
+        // Suppress events inside active smoke clouds
+        if (g::visualsSoundSmokeCheck) {
+            constexpr float kSmokeRadius = 144.0f;
+            constexpr float kSmokeRadiusSq = kSmokeRadius * kSmokeRadius;
+            bool inSmoke = false;
+            for (int si = 0; si < worldMarkerCount && !inSmoke; ++si) {
+                const WorldMarker& sm = worldMarkers[si];
+                if (!sm.valid || sm.type != WorldMarkerType::Smoke) continue;
+                const float sx = evt.position.x - sm.position.x;
+                const float sy = evt.position.y - sm.position.y;
+                const float sz = evt.position.z - sm.position.z;
+                inSmoke = (sx * sx + sy * sy + sz * sz) <= kSmokeRadiusSq;
+            }
+            if (inSmoke) continue;
+        }
+
         // Distance falloff: full brightness nearby, near-invisible at range limit (like audio volume)
         const float distNorm = std::sqrt(distSq) / rangeWorld;  // 0 = here, 1 = at range edge
         const float distBase = 1.0f - distNorm;

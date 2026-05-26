@@ -88,6 +88,7 @@ namespace g {
     inline bool& visualsSoundFootsteps = visualsSettings.soundFootsteps;
     inline bool& visualsSoundShots = visualsSettings.soundShots;
     inline bool& visualsSoundReloads = visualsSettings.soundReloads;
+    inline bool& visualsSoundSmokeCheck = visualsSettings.soundSmokeCheck;
     inline float& visualsSoundRange = visualsSettings.soundRange;
     inline float& visualsSoundDuration = visualsSettings.soundDuration;
     inline auto& visualsItemEnabledMask = visualsSettings.itemEnabledMask;
