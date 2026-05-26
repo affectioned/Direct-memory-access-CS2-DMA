@@ -19,6 +19,11 @@ if (g::visualsSound) {
         const float distSq = dx * dx + dy * dy + dz * dz;
         if (distSq > rangeWorld * rangeWorld) continue;
 
+        // Distance falloff: full brightness nearby, near-invisible at range limit (like audio volume)
+        const float distNorm = std::sqrt(distSq) / rangeWorld;  // 0 = here, 1 = at range edge
+        const float distBase = 1.0f - distNorm;
+        const float distFactor = distBase * std::sqrt(distBase);  // pow(1-d, 1.5)
+
         const uint64_t ageUs = (nowUs > evt.createdUs) ? (nowUs - evt.createdUs) : 0;
         const float t = std::clamp(static_cast<float>(ageUs) / static_cast<float>(durationUs), 0.0f, 1.0f);
 
@@ -44,7 +49,7 @@ if (g::visualsSound) {
         }
 
         const float radiusWorld = ringStartWorld + (ringEndWorld - ringStartWorld) * t;
-        const float alphaScale = std::clamp(1.0f - t, 0.0f, 1.0f);
+        const float alphaScale = std::clamp((1.0f - t) * distFactor, 0.0f, 1.0f);
         const int alpha = static_cast<int>(245.0f * alphaScale);
         if (alpha <= 4) continue;
 
