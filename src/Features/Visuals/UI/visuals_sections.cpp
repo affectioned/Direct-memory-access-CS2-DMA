@@ -692,10 +692,20 @@ void DrawSoftIconCircle(ImDrawList* drawList, const ImVec2& center, float radius
     void RenderVisualsGridPair(float columnWidth, LeftFn&& leftFn, RightFn&& rightFn)
     {
         const ImVec2 start = ImGui::GetCursorScreenPos();
+
+        ImGui::BeginGroup();
         leftFn(columnWidth);
+        ImGui::EndGroup();
+        const float leftBottom = ImGui::GetItemRectMax().y;
+
         ImGui::SetCursorScreenPos(ImVec2(start.x + columnWidth + kVisualsColumnGap, start.y));
+
+        ImGui::BeginGroup();
         rightFn(columnWidth);
-        ImGui::SetCursorScreenPos(ImVec2(start.x, start.y + kVisualsRowHeight + kVisualsRowGap));
+        ImGui::EndGroup();
+        const float rightBottom = ImGui::GetItemRectMax().y;
+
+        ImGui::SetCursorScreenPos(ImVec2(start.x, std::max(leftBottom, rightBottom)));
     }
 }
 
