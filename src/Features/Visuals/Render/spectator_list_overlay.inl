@@ -11,9 +11,9 @@ if (g::radarSpectatorList) {
     ImGui::SetNextWindowBgAlpha(0.0f);
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8.0f, 5.0f));
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(5.0f, 3.0f));
-    const bool useSpectatorFont = g::fontComicSans != nullptr;
+    const bool useSpectatorFont = g::fontVerdana != nullptr;
     if (useSpectatorFont)
-        ImGui::PushFont(g::fontComicSans);
+        ImGui::PushFont(g::fontVerdana);
     if (ImGui::Begin("##kevqdma_spectator_list", nullptr, windowFlags)) {
         static bool s_spectatorWindowDragging = false;
         if (g::menuOpen) {

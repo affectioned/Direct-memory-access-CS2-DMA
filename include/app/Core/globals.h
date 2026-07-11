@@ -159,7 +159,7 @@ namespace g {
 
     inline ImFont*& fontDefault = fontState.fontDefault;
     inline ImFont*& fontSegoeBold = fontState.fontSegoeBold;
-    inline ImFont*& fontComicSans = fontState.fontComicSans;
+    inline ImFont*& fontVerdana = fontState.fontVerdana;
     inline ImFont*& fontWeaponIcons = fontState.fontWeaponIcons;
     inline app::state::VisualsUiIconState& visualsUiIcons = state.visualsUiIcons;
 }

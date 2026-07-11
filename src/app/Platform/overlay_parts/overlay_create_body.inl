@@ -119,7 +119,7 @@
     };
     const float baseFontSize = 16.0f;
 
-    std::string segoeRegularPath, segoeBoldPath, comicRegularPath, comicBoldPath;
+    std::string segoeRegularPath, segoeBoldPath, verdanaRegularPath, verdanaBoldPath;
     {
         PWSTR fontsDir = nullptr;
         if (SUCCEEDED(SHGetKnownFolderPath(FOLDERID_Fonts, 0, nullptr, &fontsDir))) {
@@ -127,35 +127,35 @@
             CoTaskMemFree(fontsDir);
             segoeRegularPath = (fontsPath / "segoeui.ttf").string();
             segoeBoldPath = (fontsPath / "segoeuib.ttf").string();
-            comicRegularPath = (fontsPath / "comic.ttf").string();
-            comicBoldPath = (fontsPath / "comicbd.ttf").string();
+            verdanaRegularPath = (fontsPath / "verdana.ttf").string();
+            verdanaBoldPath = (fontsPath / "verdanab.ttf").string();
         } else {
             segoeRegularPath = "C:\\Windows\\Fonts\\segoeui.ttf";
             segoeBoldPath = "C:\\Windows\\Fonts\\segoeuib.ttf";
-            comicRegularPath = "C:\\Windows\\Fonts\\comic.ttf";
-            comicBoldPath = "C:\\Windows\\Fonts\\comicbd.ttf";
+            verdanaRegularPath = "C:\\Windows\\Fonts\\verdana.ttf";
+            verdanaBoldPath = "C:\\Windows\\Fonts\\verdanab.ttf";
         }
     }
 
     g::fontDefault = nullptr;
     g::fontSegoeBold = nullptr;
-    g::fontComicSans = nullptr;
+    g::fontVerdana = nullptr;
     g::fontWeaponIcons = nullptr;
 
-    if (std::filesystem::exists(comicRegularPath))
-        g::fontDefault = io.Fonts->AddFontFromFileTTF(comicRegularPath.c_str(), baseFontSize, nullptr, glyphRanges);
-    else if (std::filesystem::exists(segoeRegularPath))
+    if (std::filesystem::exists(segoeRegularPath))
         g::fontDefault = io.Fonts->AddFontFromFileTTF(segoeRegularPath.c_str(), baseFontSize, nullptr, glyphRanges);
 
-    if (std::filesystem::exists(comicBoldPath))
-        g::fontSegoeBold = io.Fonts->AddFontFromFileTTF(comicBoldPath.c_str(), g::visualsNameFontSize, nullptr, glyphRanges);
-    else if (std::filesystem::exists(segoeBoldPath))
+    if (std::filesystem::exists(segoeBoldPath))
         g::fontSegoeBold = io.Fonts->AddFontFromFileTTF(segoeBoldPath.c_str(), g::visualsNameFontSize, nullptr, glyphRanges);
-    if (std::filesystem::exists(comicRegularPath)) {
-        ImFontConfig comicCfg = {};
-        comicCfg.OversampleH = 2;
-        comicCfg.OversampleV = 2;
-        g::fontComicSans = io.Fonts->AddFontFromFileTTF(comicRegularPath.c_str(), 18.0f, &comicCfg, glyphRanges);
+
+    {
+        ImFontConfig verdanaCfg = {};
+        verdanaCfg.OversampleH = 2;
+        verdanaCfg.OversampleV = 2;
+        if (std::filesystem::exists(verdanaBoldPath))
+            g::fontVerdana = io.Fonts->AddFontFromFileTTF(verdanaBoldPath.c_str(), 18.0f, &verdanaCfg, glyphRanges);
+        else if (std::filesystem::exists(verdanaRegularPath))
+            g::fontVerdana = io.Fonts->AddFontFromFileTTF(verdanaRegularPath.c_str(), 18.0f, &verdanaCfg, glyphRanges);
     }
 
     if (io.Fonts->Fonts.empty()) {

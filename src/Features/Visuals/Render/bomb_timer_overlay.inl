@@ -112,9 +112,9 @@ if (g::visualsBombInfo && g::visualsBombTime) {
         ImGui::SetNextWindowBgAlpha(0.0f);
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8.0f, 6.0f));
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(5.0f, 5.0f));
-        const bool useBombTimerFont = g::fontComicSans != nullptr;
+        const bool useBombTimerFont = g::fontVerdana != nullptr;
         if (useBombTimerFont)
-            ImGui::PushFont(g::fontComicSans);
+            ImGui::PushFont(g::fontVerdana);
         if (ImGui::Begin("##kevqdma_bomb_timer", nullptr, windowFlags)) {
             static bool s_bombTimerDragging = false;
             const auto drawTimerText = [](ImDrawList* drawList, const ImVec2& pos, ImU32 color, const char* text) {

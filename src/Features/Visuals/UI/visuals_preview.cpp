@@ -358,7 +358,7 @@ namespace
                 
                 if (g::visualsWeaponText) {
                     const char* weapon = "AK-47";
-                    ImFont* tf = g::fontComicSans ? g::fontComicSans : ImGui::GetFont();
+                    ImFont* tf = g::fontVerdana ? g::fontVerdana : ImGui::GetFont();
                     float tfs = g::visualsWeaponTextSize > 0.0f ? g::visualsWeaponTextSize : ImGui::GetFontSize();
                     ImVec2 ts = tf->CalcTextSizeA(tfs, FLT_MAX, 0.0f, weapon);
                     TextShadowFont(dl, tf, tfs, ImVec2(cx - ts.x * 0.5f, bottomY),
@@ -368,7 +368,7 @@ namespace
             }
             if (g::visualsWeaponAmmo) {
                 const char* ammo = "25 / 30";
-                    ImFont* af = g::fontComicSans ? g::fontComicSans : ImGui::GetFont();
+                    ImFont* af = g::fontVerdana ? g::fontVerdana : ImGui::GetFont();
                 float afs = g::visualsWeaponAmmoSize > 0.0f ? g::visualsWeaponAmmoSize : ImGui::GetFontSize();
                 ImVec2 ts = af->CalcTextSizeA(afs, FLT_MAX, 0.0f, ammo);
                 TextShadowFont(dl, af, afs, ImVec2(cx - ts.x * 0.5f, bottomY),
@@ -382,15 +382,15 @@ namespace
             float flagY = boxTop;
             float flagX = boxLeft + boxW + 6;
             if (g::visualsFlagScoped) {
-                TextShadowFont(dl, g::fontComicSans, ImGui::GetFontSize(), ImVec2(flagX, flagY), Col4(g::visualsFlagScopedColor), "Scoped");
+                TextShadowFont(dl, g::fontVerdana, ImGui::GetFontSize(), ImVec2(flagX, flagY), Col4(g::visualsFlagScopedColor), "Scoped");
                 flagY += ImGui::GetFontSize() + 1;
             }
             if (g::visualsFlagMoney) {
-                TextShadowFont(dl, g::fontComicSans, ImGui::GetFontSize(), ImVec2(flagX, flagY), Col4(g::visualsFlagMoneyColor), "$4200");
+                TextShadowFont(dl, g::fontVerdana, ImGui::GetFontSize(), ImVec2(flagX, flagY), Col4(g::visualsFlagMoneyColor), "$4200");
                 flagY += ImGui::GetFontSize() + 1;
             }
             if (g::visualsDistance) {
-                TextShadowFont(dl, g::fontComicSans, ImGui::GetFontSize(), ImVec2(flagX, flagY), Col4(g::visualsDistanceColor), "42m");
+                TextShadowFont(dl, g::fontVerdana, ImGui::GetFontSize(), ImVec2(flagX, flagY), Col4(g::visualsDistanceColor), "42m");
                 flagY += ImGui::GetFontSize() + 1;
             }
         }

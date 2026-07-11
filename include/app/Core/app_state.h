@@ -181,7 +181,7 @@ namespace app::state {
     struct FontState {
         ImFont* fontDefault = nullptr;
         ImFont* fontSegoeBold = nullptr;
-        ImFont* fontComicSans = nullptr;
+        ImFont* fontVerdana = nullptr;
         ImFont* fontWeaponIcons = nullptr;
     };
 
