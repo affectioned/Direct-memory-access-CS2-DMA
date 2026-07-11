@@ -61,7 +61,8 @@
         webRadarDemandActive ||
         (g::radarEnabled && g::radarShowAngles);
     const bool wantsPlayerVisibilityAux =
-        g::visualsVisibilityColoring;
+        g::visualsVisibilityColoring ||
+        g::visualsVisibleOnly;
     const bool hasObserverOffsets =
         ofs.C_BasePlayerPawn_m_pObserverServices > 0 &&
         ofs.CPlayer_ObserverServices_m_iObserverMode > 0 &&

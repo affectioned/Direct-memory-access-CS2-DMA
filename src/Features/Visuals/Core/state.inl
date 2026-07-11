@@ -211,16 +211,6 @@ static constexpr uint64_t kLiveCameraFreshnessUs = 125000;
 static constexpr uint32_t kCameraInvalidateMissThreshold = 40;
 static constexpr uint32_t kCameraRecoveryMissThreshold = 180;
 
-static std::atomic<uintptr_t> s_livePawnPointers[64] = {};
-static std::atomic<int> s_liveLocalMaskBit{ -1 };
-static std::atomic<int> s_liveLocalMaskSlotBit{ -1 };
-static std::atomic<int> s_liveLocalHandleSlotBit{ -1 };
-static std::atomic<int> s_liveLocalControllerMaskBit{ -1 };
-static std::atomic<bool> s_liveLocalMaskResolved{ false };
-static std::atomic<uint8_t> s_liveVisible[64] = {};
-static std::atomic<uint64_t> s_liveVisibilityUpdatedUs[64] = {};
-static constexpr uint64_t kLiveVisibilityFreshnessUs = 50000;
-
 static WorldMarker s_worldMarkers[256] = {};
 static int s_worldMarkerCount = 0;
 
@@ -673,15 +663,11 @@ static void ResetRuntimeState(bool publishClearedSnapshot = false)
             s_playerDeathConfirmCount[i] = 0;
             s_prevRawPlayerPos[i] = {};
             s_prevRawPlayerPosReady[i] = false;
-            s_livePawnPointers[i].store(0, std::memory_order_relaxed);
-            s_liveVisible[i].store(0, std::memory_order_relaxed);
-            s_liveVisibilityUpdatedUs[i].store(0, std::memory_order_relaxed);
             s_prevShotsFired[i] = 0;
             s_prevInReload[i] = 0;
             s_soundPrevStateValid[i] = false;
             s_lastFootstepEmitUs[i] = 0;
         }
-        s_liveLocalMaskBit.store(-1, std::memory_order_relaxed);
         s_bombState = {};
         s_spectatorCount = 0;
         memset(s_spectators, 0, sizeof(s_spectators));

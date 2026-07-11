@@ -224,15 +224,6 @@
 
     s_localMaskResolved = localMaskResolved;
 
-
-    for (int i = 0; i < 64; ++i)
-        s_livePawnPointers[i].store(pawns[i], std::memory_order_relaxed);
-    s_liveLocalMaskBit.store(localMaskBit, std::memory_order_relaxed);
-    s_liveLocalMaskSlotBit.store(localMaskSlotBit, std::memory_order_relaxed);
-    s_liveLocalHandleSlotBit.store(localHandleSlotBit, std::memory_order_relaxed);
-    s_liveLocalControllerMaskBit.store(localControllerMaskBit, std::memory_order_relaxed);
-    s_liveLocalMaskResolved.store(localMaskResolved, std::memory_order_relaxed);
-
 #include "commit_players.inl"
 
     

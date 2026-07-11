@@ -194,17 +194,7 @@ void visuals::Draw()
                 continue;
             if (!g::visualsShowTeammates && (localTeam == 2 || localTeam == 3) && p.team == localTeam)
                 continue;
-            bool effectiveVisible = p.visible;
-            {
-                const uint64_t liveUpdatedUs = s_liveVisibilityUpdatedUs[i].load(std::memory_order_relaxed);
-                if (liveUpdatedUs > 0 &&
-                    nowUs >= liveUpdatedUs &&
-                    (nowUs - liveUpdatedUs) <= kLiveVisibilityFreshnessUs) {
-                    const uint8_t live = s_liveVisible[i].load(std::memory_order_relaxed);
-                    if (live == 2) effectiveVisible = true;
-                    else if (live == 1) effectiveVisible = false;
-                }
-            }
+            const bool effectiveVisible = p.visible;
             const bool filteredByVisibleOnly = g::visualsVisibleOnly && !effectiveVisible;
 
             const visuals::PlayerData& prevP = prevPlayers[i];
@@ -443,16 +433,6 @@ void visuals::Draw()
                 validBoneSegmentCount >= 5;
 
             bool isVisibleNow = p.visible;
-            {
-                const uint64_t liveUpdatedUs = s_liveVisibilityUpdatedUs[i].load(std::memory_order_relaxed);
-                if (liveUpdatedUs > 0 &&
-                    nowUs >= liveUpdatedUs &&
-                    (nowUs - liveUpdatedUs) <= kLiveVisibilityFreshnessUs) {
-                    const uint8_t live = s_liveVisible[i].load(std::memory_order_relaxed);
-                    if (live == 2) isVisibleNow = true;
-                    else if (live == 1) isVisibleNow = false;
-                }
-            }
             if (!isVisibleNow && !localMaskResolved && p.spottedMask != 0ULL) {
                 const bool onScreen169 =
                     boxLeft < (screenW - 1.0f) &&
